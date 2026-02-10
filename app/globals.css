@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Tremor v3 constructs Tailwind class names dynamically (e.g. `fill-${color}-500`),
    which Tailwind v4's JIT scanner cannot detect. We must explicitly safelist them. */
