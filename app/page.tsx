@@ -323,10 +323,7 @@ export default function Home() {
       {/* ── Footer ───────────────────────────────────────────── */}
       <footer className="border-t border-gray-200 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#111118] py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 text-center text-sm text-gray-400 dark:text-gray-500">
-          <div className="flex items-center gap-2 font-semibold text-gray-600 dark:text-gray-400">
-            <span className="flex h-6 w-6 items-center justify-center rounded bg-magenta text-[10px] font-bold text-white">
-              T
-            </span>
+          <div className="font-semibold text-gray-600 dark:text-gray-400">
             Transparency Portal
           </div>
           <p>&copy; {new Date().getFullYear()} Thorsten Meyer</p>
