@@ -6,6 +6,7 @@ import { ViewType } from "@/types";
 import { viewConfigs } from "@/config/view-configs";
 import { useCustomer } from "@/lib/customer-context";
 import WidgetGrid from "@/components/widgets/WidgetGrid";
+import ZeroOutageBanner from "@/components/layout/ZeroOutageBanner";
 
 function DashboardContent() {
   const searchParams = useSearchParams();
@@ -36,7 +37,12 @@ function DashboardContent() {
       })
     : widgets;
 
-  return <WidgetGrid widgets={filteredWidgets} />;
+  return (
+    <>
+      <ZeroOutageBanner />
+      <WidgetGrid widgets={filteredWidgets} />
+    </>
+  );
 }
 
 export default function DashboardPage() {

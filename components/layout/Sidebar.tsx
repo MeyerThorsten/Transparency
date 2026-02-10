@@ -52,9 +52,8 @@ export default function Sidebar() {
 
       {/* Footer */}
       <div className="px-5 py-4 border-t border-gray-100">
-        <div className="text-xs text-gray-400">
-          <div>Zero Outage Program</div>
-          <div className="mt-0.5">99.999% Availability Target</div>
+        <div className="text-[10px] text-gray-400 text-center">
+          T-Systems Transparency Portal
         </div>
       </div>
     </aside>
