@@ -29,7 +29,7 @@ export default function PendingChanges() {
     getPendingChanges(customer.id).then(setData);
   }, [customer]);
 
-  if (!data) return null;
+  if (!data) return <div />;
 
   if (data.length === 0) {
     return <p className="text-sm text-gray-500">No pending changes.</p>;

@@ -15,7 +15,7 @@ export default function ResourceUtilization() {
     getResourceUtilization(customer.id).then(setData);
   }, [customer]);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) return <div />;
 
   const cpuData = data.map((d) => ({ timestamp: d.timestamp, CPU: d.cpu }));
   const memoryData = data.map((d) => ({ timestamp: d.timestamp, Memory: d.memory }));

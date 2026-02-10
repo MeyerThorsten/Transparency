@@ -30,7 +30,7 @@ export default function DigitalTransformation() {
     getDigitalTransformation(customer.id).then(setMilestones);
   }, [customer]);
 
-  if (milestones.length === 0) return null;
+  if (milestones.length === 0) return <div />;
 
   const avgProgress = Math.round(
     milestones.reduce((sum, m) => sum + m.progress, 0) / milestones.length

@@ -15,7 +15,7 @@ export default function DnsResolutionTime() {
     getDnsResolution(customer.id).then(setData);
   }, [customer]);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) return <div />;
 
   const currentAvg = data[data.length - 1].avgMs;
   const chartData = data.map((d) => ({

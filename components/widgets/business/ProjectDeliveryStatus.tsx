@@ -23,7 +23,7 @@ export default function ProjectDeliveryStatus() {
     getProjects(customer.id).then(setData);
   }, [customer]);
 
-  if (!data) return null;
+  if (!data) return <div />;
 
   return (
     <div className="overflow-x-auto">

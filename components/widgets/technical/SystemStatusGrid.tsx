@@ -28,7 +28,7 @@ export default function SystemStatusGrid() {
     getServicesByCategories(customer.subscribedCategories).then(setServices);
   }, [customer]);
 
-  if (services.length === 0) return null;
+  if (services.length === 0) return <div />;
 
   return (
     <div className="space-y-3">

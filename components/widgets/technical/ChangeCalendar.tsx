@@ -20,7 +20,7 @@ export default function ChangeCalendar() {
     getChangeCalendar(customer.id).then(setData);
   }, [customer]);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) return <div />;
 
   const weeks: ChangeCalendarEntry[][] = [];
   for (let i = 0; i < data.length; i += 7) {

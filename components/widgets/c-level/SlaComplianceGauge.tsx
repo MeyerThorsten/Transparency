@@ -17,7 +17,7 @@ export default function SlaComplianceGauge() {
     getSlaHistory(customer.id).then(setHistory);
   }, [customer]);
 
-  if (currentSla === null) return null;
+  if (currentSla === null) return <div />;
 
   const target = 99.999;
   const gap = Math.max(0, target - currentSla);
@@ -49,11 +49,10 @@ export default function SlaComplianceGauge() {
             data={chartData}
             category="value"
             index="name"
-            colors={meetsTarget ? ["emerald", "gray"] : ["amber", "gray"]}
+            colors={meetsTarget ? ["emerald", "slate"] : ["rose", "slate"]}
             showAnimation
             showTooltip={false}
             showLabel={false}
-            variant="pie"
           />
         </div>
       </div>

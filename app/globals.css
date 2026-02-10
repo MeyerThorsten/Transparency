@@ -1,5 +1,44 @@
 @import "tailwindcss";
 
+/* Tremor v3 constructs Tailwind class names dynamically (e.g. `fill-${color}-500`),
+   which Tailwind v4's JIT scanner cannot detect. We must explicitly safelist them. */
+@source inline("
+  fill-blue-500 fill-cyan-500 fill-slate-500 fill-gray-500 fill-red-500 fill-orange-500
+  fill-amber-500 fill-emerald-500 fill-violet-500 fill-fuchsia-500 fill-rose-500 fill-indigo-500
+  fill-green-500 fill-pink-500 fill-sky-500 fill-teal-500 fill-purple-500 fill-yellow-500
+  fill-zinc-500 fill-neutral-500 fill-stone-500 fill-lime-500
+  stroke-blue-500 stroke-cyan-500 stroke-slate-500 stroke-gray-500 stroke-red-500 stroke-orange-500
+  stroke-amber-500 stroke-emerald-500 stroke-violet-500 stroke-fuchsia-500 stroke-rose-500 stroke-indigo-500
+  stroke-green-500 stroke-pink-500 stroke-sky-500 stroke-teal-500 stroke-purple-500 stroke-yellow-500
+  stroke-zinc-500 stroke-neutral-500 stroke-stone-500 stroke-lime-500
+  bg-blue-500 bg-cyan-500 bg-slate-500 bg-gray-500 bg-red-500 bg-orange-500
+  bg-amber-500 bg-emerald-500 bg-violet-500 bg-fuchsia-500 bg-rose-500 bg-indigo-500
+  bg-green-500 bg-pink-500 bg-sky-500 bg-teal-500 bg-purple-500 bg-yellow-500
+  bg-zinc-500 bg-neutral-500 bg-stone-500 bg-lime-500
+  bg-blue-50 bg-cyan-50 bg-slate-50 bg-gray-50 bg-red-50 bg-orange-50
+  bg-amber-50 bg-emerald-50 bg-violet-50 bg-fuchsia-50 bg-rose-50 bg-indigo-50
+  bg-blue-100 bg-cyan-100 bg-slate-100 bg-gray-100 bg-red-100 bg-orange-100
+  bg-amber-100 bg-emerald-100 bg-violet-100 bg-fuchsia-100 bg-rose-100 bg-indigo-100
+  bg-blue-200 bg-cyan-200 bg-slate-200 bg-gray-200 bg-red-200 bg-orange-200
+  bg-amber-200 bg-emerald-200 bg-violet-200 bg-fuchsia-200 bg-rose-200 bg-indigo-200
+  bg-blue-600 bg-cyan-600 bg-slate-600 bg-gray-600 bg-red-600 bg-orange-600
+  bg-amber-600 bg-emerald-600 bg-violet-600 bg-fuchsia-600 bg-rose-600 bg-indigo-600
+  text-blue-500 text-cyan-500 text-slate-500 text-gray-500 text-red-500 text-orange-500
+  text-amber-500 text-emerald-500 text-violet-500 text-fuchsia-500 text-rose-500 text-indigo-500
+  text-blue-700 text-cyan-700 text-slate-700 text-gray-700 text-red-700 text-orange-700
+  text-amber-700 text-emerald-700 text-violet-700 text-fuchsia-700 text-rose-700 text-indigo-700
+  text-blue-900 text-cyan-900 text-slate-900 text-gray-900 text-red-900 text-orange-900
+  text-amber-900 text-emerald-900 text-violet-900 text-fuchsia-900 text-rose-900 text-indigo-900
+  border-blue-500 border-cyan-500 border-slate-500 border-gray-500 border-red-500 border-orange-500
+  border-amber-500 border-emerald-500 border-violet-500 border-fuchsia-500 border-rose-500 border-indigo-500
+  ring-blue-300 ring-cyan-300 ring-slate-300 ring-gray-300 ring-red-300 ring-orange-300
+  ring-amber-300 ring-emerald-300 ring-violet-300 ring-fuchsia-300 ring-rose-300 ring-indigo-300
+  fill-tremor-content stroke-tremor-border bg-tremor-background bg-tremor-background-muted
+  text-tremor-default text-tremor-title text-tremor-metric text-tremor-content text-tremor-content-emphasis
+  text-tremor-content-strong text-tremor-label text-tremor-content-subtle
+  stroke-tremor-border border-tremor-border ring-tremor-ring
+");
+
 :root {
   --magenta: #E20074;
   --magenta-hover: #C00063;
@@ -13,6 +52,7 @@
 }
 
 @theme inline {
+  /* T-Systems brand */
   --color-magenta: #E20074;
   --color-magenta-hover: #C00063;
   --color-magenta-light: #FFF0F8;
@@ -30,6 +70,31 @@
   --color-danger: #F2321E;
   --color-warning: #FC7E21;
   --color-info: #3950EA;
+
+  /* Tremor semantic colors (light mode) */
+  --color-tremor-brand: #3b82f6;
+  --color-tremor-brand-faint: #eff6ff;
+  --color-tremor-brand-muted: #bfdbfe;
+  --color-tremor-brand-subtle: #60a5fa;
+  --color-tremor-brand-emphasis: #1d4ed8;
+  --color-tremor-brand-inverted: #ffffff;
+  --color-tremor-background: #ffffff;
+  --color-tremor-background-muted: #f9fafb;
+  --color-tremor-background-subtle: #f3f4f6;
+  --color-tremor-background-emphasis: #374151;
+  --color-tremor-border: #e5e7eb;
+  --color-tremor-ring: #e5e7eb;
+  --color-tremor-content: #6b7280;
+  --color-tremor-content-subtle: #9ca3af;
+  --color-tremor-content-emphasis: #374151;
+  --color-tremor-content-strong: #111827;
+  --color-tremor-content-inverted: #ffffff;
+
+  /* Tremor font sizes */
+  --text-tremor-label: 0.75rem;
+  --text-tremor-default: 0.875rem;
+  --text-tremor-title: 1.125rem;
+  --text-tremor-metric: 1.875rem;
 }
 
 body {

@@ -15,7 +15,7 @@ export default function SlaComplianceByService() {
     getServicesByCategories(customer.subscribedCategories).then(setData);
   }, [customer]);
 
-  if (!data) return null;
+  if (!data) return <div />;
 
   const sorted = [...data].sort((a, b) => b.uptime - a.uptime);
 

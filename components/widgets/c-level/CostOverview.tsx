@@ -16,7 +16,7 @@ export default function CostOverview() {
     getCostBreakdown(customer.id).then(setCosts);
   }, [customer]);
 
-  if (costs.length === 0) return null;
+  if (costs.length === 0) return <div />;
 
   const totalCurrent = costs.reduce((sum, c) => sum + c.currentMonth, 0);
   const totalPrevious = costs.reduce((sum, c) => sum + c.previousMonth, 0);
@@ -53,10 +53,11 @@ export default function CostOverview() {
         data={chartData}
         index="category"
         categories={["Current Month", "Budget"]}
-        colors={["fuchsia", "gray"]}
+        colors={["fuchsia", "cyan"]}
         valueFormatter={(v: number) => `${(v / 1000).toFixed(0)}k €`}
         yAxisWidth={56}
         showAnimation
+        tickGap={2}
         className="h-48"
       />
     </div>

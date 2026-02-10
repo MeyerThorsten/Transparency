@@ -15,7 +15,7 @@ export default function UptimeByService() {
     getServicesByCategories(customer.subscribedCategories).then(setServices);
   }, [customer]);
 
-  if (services.length === 0) return null;
+  if (services.length === 0) return <div />;
 
   const barData = services
     .sort((a, b) => b.uptime - a.uptime)

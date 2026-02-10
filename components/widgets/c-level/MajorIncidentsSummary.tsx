@@ -22,7 +22,7 @@ export default function MajorIncidentsSummary() {
     getIncidentSummary(customer.id).then(setSummary);
   }, [customer]);
 
-  if (summary.length === 0) return null;
+  if (summary.length === 0) return <div />;
 
   const totalOpen = summary.reduce((sum, s) => sum + s.open, 0);
   const totalIncidents = summary.reduce((sum, s) => sum + s.total, 0);

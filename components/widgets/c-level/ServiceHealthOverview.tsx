@@ -22,7 +22,7 @@ export default function ServiceHealthOverview() {
     getServicesByCategories(customer.subscribedCategories).then(setServices);
   }, [customer]);
 
-  if (services.length === 0) return null;
+  if (services.length === 0) return <div />;
 
   const operational = services.filter((s) => s.status === "operational").length;
 

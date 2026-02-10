@@ -15,7 +15,7 @@ export default function PatchCompliance() {
     getPatchCompliance(customer.id).then(setData);
   }, [customer]);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) return <div />;
 
   const totalCompliant = data.reduce((sum, d) => sum + d.compliant, 0);
   const totalNonCompliant = data.reduce((sum, d) => sum + d.nonCompliant, 0);

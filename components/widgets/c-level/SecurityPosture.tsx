@@ -22,7 +22,7 @@ export default function SecurityPosture() {
     getSecurityPosture(customer.id).then(setData);
   }, [customer]);
 
-  if (!data) return null;
+  if (!data) return <div />;
 
   const scoreColor =
     data.overallScore >= 80

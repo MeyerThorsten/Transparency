@@ -14,7 +14,7 @@ export default function BackupSuccessRate() {
     getBackups(customer.id).then(setData);
   }, [customer]);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) return <div />;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

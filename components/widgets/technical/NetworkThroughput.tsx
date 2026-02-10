@@ -15,7 +15,7 @@ export default function NetworkThroughput() {
     getNetworkThroughput(customer.id).then(setData);
   }, [customer]);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) return <div />;
 
   const chartData = data.map((d) => ({
     timestamp: d.timestamp,

@@ -15,7 +15,7 @@ export default function TicketVolumeTrends() {
     getTicketVolume(customer.id).then(setData);
   }, [customer]);
 
-  if (!data) return null;
+  if (!data) return <div />;
 
   const chartData = data.map((d) => ({
     month: d.month,

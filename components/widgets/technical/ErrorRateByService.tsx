@@ -15,7 +15,7 @@ export default function ErrorRateByService() {
     getErrorRates(customer.id).then(setData);
   }, [customer]);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) return <div />;
 
   const serviceNames = [...new Set(data.map((d) => d.serviceName))];
 

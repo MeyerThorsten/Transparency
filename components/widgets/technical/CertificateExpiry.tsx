@@ -21,7 +21,7 @@ export default function CertificateExpiry() {
     getCertificates(customer.id).then(setData);
   }, [customer]);
 
-  if (data.length === 0) return null;
+  if (data.length === 0) return <div />;
 
   return (
     <div className="overflow-x-auto">

@@ -15,7 +15,7 @@ export default function ChangeSuccessRate() {
     getChangeSuccessRate(customer.id).then(setData);
   }, [customer]);
 
-  if (!data) return null;
+  if (!data) return <div />;
 
   const chartData = [
     { name: "Success", value: data.rate },
@@ -33,9 +33,11 @@ export default function ChangeSuccessRate() {
           data={chartData}
           category="value"
           index="name"
-          colors={["fuchsia", "gray"]}
+          colors={["emerald", "slate"]}
           className="h-40 w-40"
           showAnimation
+          showLabel={false}
+          showTooltip={false}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-2xl font-bold text-gray-900">{data.rate}%</span>

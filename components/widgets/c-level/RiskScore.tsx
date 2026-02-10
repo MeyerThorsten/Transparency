@@ -16,7 +16,7 @@ export default function RiskScore() {
     getRisk(customer.id).then(setData);
   }, [customer]);
 
-  if (!data) return null;
+  if (!data) return <div />;
 
   const scoreColor =
     data.overall < 30

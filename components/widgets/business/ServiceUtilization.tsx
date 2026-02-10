@@ -15,12 +15,18 @@ export default function ServiceUtilization() {
     getServiceUtilization(customer.id).then(setData);
   }, [customer]);
 
-  if (!data) return null;
+  if (!data) return <div />;
 
   const chartData = data.map((svc) => {
     const lastMonth = svc.months[svc.months.length - 1];
+    const shortName = svc.serviceName
+      .replace("Open Telekom Cloud", "OTC")
+      .replace("SAP S/4HANA Managed", "SAP S/4HANA")
+      .replace("Managed Security (SOC)", "Security SOC")
+      .replace("Digital Workplace", "Workplace")
+      .replace("AI & Data Analytics Platform", "AI & Data");
     return {
-      service: svc.serviceName,
+      service: shortName,
       Usage: lastMonth?.usage ?? 0,
       Capacity: (lastMonth?.capacity ?? 0) - (lastMonth?.usage ?? 0),
     };
@@ -32,10 +38,11 @@ export default function ServiceUtilization() {
         data={chartData}
         index="service"
         categories={["Usage", "Capacity"]}
-        colors={["fuchsia", "gray"]}
+        colors={["blue", "emerald"]}
         stack
         valueFormatter={(v: number) => `${v}%`}
         yAxisWidth={48}
+        tickGap={2}
         className="h-64"
         showAnimation
       />
