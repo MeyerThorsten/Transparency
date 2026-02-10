@@ -30,7 +30,7 @@ export default function NetworkThroughput() {
         index="timestamp"
         categories={["Inbound", "Outbound"]}
         colors={["cyan", "fuchsia"]}
-        yAxisWidth={64}
+        yAxisWidth={80}
         showAnimation
         curveType="monotone"
         valueFormatter={(v: number) => `${v} Mbps`}
