@@ -1,6 +1,6 @@
 # The EUR 80 Million Blind Spot: Why T-Systems' Best Work Is Invisible to Its Customers
 
-**By Thorsten Meyer**
+**By Thorsten Meyer | February 2026**
 
 ---
 
@@ -30,26 +30,209 @@ The question for T-Systems leadership is not "Are we delivering?" -- the Zero Ou
 
 ---
 
-## The Churn Economics: What Invisible Quality Costs
+## The Financial Impact: EUR 1.4 Million Investment, EUR 50-120 Million Return
 
-Acquiring a new enterprise customer costs 5 to 25 times more than retaining an existing one. A 5% improvement in retention yields a 25-95% increase in profits. These are not theoretical -- they are Bain & Company numbers validated across two decades of research.
+This section lays out every number, every assumption, and every calculation. No black boxes.
 
-Apply this to T-Systems' position:
+### What It Costs to Build: The Team Model
 
-| Metric | Value |
-|--------|-------|
-| T-Systems FY 2024 revenue | EUR 4.0 billion |
-| Enterprise customers served | 900+ |
-| Average revenue per customer (estimated) | EUR 4.4 million/year |
-| Industry-average managed services churn | 17% annually |
-| Best-in-class MSP churn target | <10% annually |
-| Revenue impact of retaining 9-18 additional customers (1-2% churn reduction) | EUR 40-80 million/year |
+The Transparency Portal requires a blended delivery team across three locations, leveraging T-Systems' existing delivery centers. Here is the team composition for Year 1 (build + pilot) and Year 2+ (operate + scale).
 
-EUR 40 to 80 million in preserved annual revenue. From retaining fewer than 20 additional customers out of 900. Before counting upsell potential -- where top-performing firms generate over 50% of new ARR from existing accounts, and regular business reviews correlate with 33% higher expansion revenue.
+**Year 1: Build and Pilot (12 months)**
 
-> *The cheapest customer to acquire is the one you never lost.*
+| Role | Location | FTEs | Annual Fully-Loaded Cost per FTE | Total Cost | Rationale |
+|------|----------|------|----------------------------------|------------|-----------|
+| Product Owner | Germany | 1 | EUR 125,000 | EUR 125,000 | Owns backlog, stakeholder alignment, QBR integration strategy. German-based for proximity to T-Systems leadership and key accounts. Fully-loaded includes EUR 85K gross salary + 21% social contributions + 13th month + office + management overhead at 1.5x multiplier. |
+| Solution Architect | Germany | 1 | EUR 145,000 | EUR 145,000 | Designs API integration with Zero Outage monitoring, security review, data architecture. Senior role at EUR 100K gross, 1.45x fully-loaded multiplier. |
+| Senior Frontend Developers | Hungary | 2 | EUR 68,000 | EUR 136,000 | Next.js/React development, chart components, responsive design. Budapest nearshore center. EUR 48K gross salary, 1.42x multiplier (14.5% employer social + office + tools + cafeteria benefits). |
+| Backend / Integration Developers | India | 3 | EUR 35,000 | EUR 105,000 | API connectors to monitoring systems, data aggregation services, mock-to-live data migration. Pune/Hyderabad delivery center. INR 15 LPA base CTC, 1.5x multiplier for office, tools, management layer, attrition buffer. |
+| QA Engineer | India | 1 | EUR 28,000 | EUR 28,000 | Test automation, cross-browser testing, accessibility. INR 12 LPA base, 1.5x multiplier. |
+| UX Designer | Hungary | 1 | EUR 58,000 | EUR 58,000 | Dashboard design, customer research, usability testing. EUR 40K gross, 1.45x multiplier. |
+| Project Manager | Hungary | 1 | EUR 62,000 | EUR 62,000 | Scrum ceremonies, stakeholder reporting, release management. EUR 43K gross, 1.44x multiplier. |
+| Security Reviewer (part-time, 25%) | Germany | 0.25 | EUR 140,000 | EUR 35,000 | Penetration testing, data protection review, compliance sign-off. Senior German security specialist at 25% allocation. |
+| **Total Year 1** | | **10.25 FTEs** | | **EUR 694,000** | |
 
-The Transparency Portal does not need to win new business to justify its existence. It needs to prevent two contract non-renewals per quarter.
+**How these costs were calculated:** Fully-loaded costs include base salary, employer social contributions (21% Germany, 14.5% Hungary, 17-20% India), office space and facilities (8-15% of salary depending on location), management overhead (8-10%), tools and licenses (5-8%), and training/attrition buffers. The multiplier over gross salary is 1.45-1.55x for Germany (including works council overhead and 13th month provisions per Deutsche Telekom collective agreements), 1.40-1.50x for Hungary, and 1.40-1.60x for India. Sources: Glassdoor, PayScale, PWC Hungary Tax Summary, FMC Group Germany Employment Cost Guide.
+
+**Year 2+: Operate and Scale (ongoing)**
+
+| Role | Location | FTEs | Annual Cost per FTE | Total Cost | Rationale |
+|------|----------|------|---------------------|------------|-----------|
+| Product Owner | Germany | 0.5 | EUR 125,000 | EUR 62,500 | Part-time: roadmap maintenance, feature prioritization |
+| Frontend Developer | Hungary | 1 | EUR 68,000 | EUR 68,000 | Feature development, customer-requested views |
+| Backend Developer | India | 2 | EUR 35,000 | EUR 70,000 | Monitoring integrations, new data source connectors |
+| DevOps / SRE | India | 1 | EUR 32,000 | EUR 32,000 | Infrastructure, deployments, uptime |
+| **Total Year 2+** | | **4.5 FTEs** | | **EUR 232,500** | |
+
+**Infrastructure costs:** Hosting on existing T-Systems cloud infrastructure. Incremental cost estimated at EUR 3,000-5,000/month for compute, CDN, and database -- EUR 48,000/year. This assumes the portal runs on the same cloud platform T-Systems already operates for customers.
+
+**Total investment summary:**
+
+| Period | Team Cost | Infrastructure | Total |
+|--------|-----------|----------------|-------|
+| Year 1 (build + pilot) | EUR 694,000 | EUR 48,000 | EUR 742,000 |
+| Year 2 (operate + scale) | EUR 232,500 | EUR 48,000 | EUR 280,500 |
+| Year 3+ (steady state) | EUR 232,500 | EUR 48,000 | EUR 280,500 |
+| **3-Year Total** | **EUR 1,159,000** | **EUR 144,000** | **EUR 1,303,000** |
+
+Round it to EUR 1.4 million over three years including contingency. That is the full cost.
+
+---
+
+### What It Prevents: The Revenue You Stop Losing
+
+T-Systems generates EUR 4.0 billion in annual revenue from 900+ enterprise customers. That is an average of approximately EUR 4.4 million per customer per year. Some customers are worth EUR 500K, others EUR 80 million. The math works regardless of which ones you lose.
+
+**Current churn reality in managed IT services:**
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| Industry-average annual churn (managed IT services) | 17% | First Page Sage, Customer Retention Rates by Industry, 2026 |
+| Best-in-class MSP churn target | <10% | TSIA benchmark |
+| T-Systems revenue at risk from 17% churn | EUR 680 million/year | 17% of EUR 4.0B (theoretical maximum if all revenue churned at average rate) |
+
+T-Systems' actual churn rate is not public. But even at a best-in-class 10%, that is EUR 400 million in annual revenue at risk of non-renewal in any given year. The question is: how many of those non-renewals are preventable through better visibility?
+
+**The retention case:**
+
+A Transparency Portal does not prevent churn caused by pricing, M&A, or insolvency. It prevents churn caused by *perceived* lack of value -- the customer who cannot see the 99.999% uptime they are paying for, the CISO who cannot show their board that patch compliance is at 94%, the CTO who has to ask for a report instead of opening a dashboard.
+
+| Scenario | Customers Retained | Revenue Preserved | How |
+|----------|--------------------|-------------------|-----|
+| Conservative: 0.5% churn reduction | 4-5 customers | EUR 18-22 million/year | Portal provides self-service visibility, reducing "what am I paying for?" friction at renewal |
+| Moderate: 1% churn reduction | 9 customers | EUR 40 million/year | Portal becomes embedded in QBRs, customer stakeholders reference it independently |
+| Aggressive: 2% churn reduction | 18 customers | EUR 80 million/year | Portal is a contractual deliverable, customer staff use it daily, switching cost increases |
+
+**Assumption explained:** These figures use the EUR 4.4M average revenue per customer. In practice, the customers most likely to churn over visibility issues are mid-market accounts (EUR 1-5M ACV) rather than strategic accounts with dedicated service delivery managers. If we weight toward mid-market at EUR 2.5M average, the conservative case still preserves EUR 10-12 million annually -- 8x the three-year investment cost, recovered in year one.
+
+> *Preventing five mid-market non-renewals per year preserves EUR 12.5 million in revenue. The portal costs EUR 742K to build. That is a 17:1 return in year one.*
+
+---
+
+### What It Costs When You Lose a Customer Anyway
+
+When an enterprise managed services customer leaves, the financial damage extends far beyond the lost contract value.
+
+| Cost Element | Amount | Explanation |
+|-------------|--------|-------------|
+| Lost annual revenue | EUR 2.5-15M per customer | Direct P&L impact. A mid-market customer at EUR 2.5M ACV; a large enterprise at EUR 15M+. |
+| Transition and wind-down costs | EUR 200-600K per customer | 3-6 months of knowledge transfer, data migration support, and staff reallocation. T-Systems must dedicate senior engineers to ensure clean handover -- these are fully-loaded months at German or Hungarian rates (EUR 10-15K/month per person, 3-5 people involved). |
+| Stranded capacity costs | EUR 100-500K per customer | Reserved cloud infrastructure, dedicated hardware, pre-purchased licenses that cannot be immediately reassigned. Depreciation continues regardless of customer departure. |
+| Revenue replacement cost (new customer acquisition) | EUR 400K-1.2M per replacement | Enterprise managed services sales cycles run 9-18 months. Pre-sales engineering alone costs EUR 100-300K per bid. RFP responses cost EUR 50-200K. Win rates on competitive RFPs average 20-35%, meaning the amortized cost per successful win is 3-5x the cost of a single bid. |
+| Lost upsell pipeline | EUR 500K-3M per customer over 3 years | Top-performing managed services firms generate over 50% of new ARR from upsells to existing customers. A departed customer takes their entire expansion pipeline with them. |
+
+**Total cost of losing one mid-market customer:**
+
+| Component | Low Estimate | High Estimate |
+|-----------|-------------|---------------|
+| Year 1 lost revenue | EUR 2,500,000 | EUR 2,500,000 |
+| Year 2-5 lost revenue (contract lifetime) | EUR 7,500,000 | EUR 10,000,000 |
+| Transition and wind-down | EUR 200,000 | EUR 400,000 |
+| Stranded capacity | EUR 100,000 | EUR 300,000 |
+| Revenue replacement (acquisition cost) | EUR 400,000 | EUR 800,000 |
+| Lost upsell pipeline (3 years) | EUR 500,000 | EUR 1,500,000 |
+| **Total economic impact** | **EUR 11,200,000** | **EUR 15,500,000** |
+
+One customer. EUR 11-15 million in total economic impact. The portal costs EUR 742K to build.
+
+**Win-back is not a strategy.** Once a customer migrates their managed services to a competitor, the win-back success rate is 10-20% at best. The cost to win them back runs 1.5-3x the original acquisition cost -- EUR 600K to EUR 3.6M -- and the timeline is 2-5 years, typically at the next contract renewal cycle with the new provider. By then, the new provider has deep operational integration, the customer has absorbed migration pain they refuse to repeat, and the original switching trigger has been forgotten or rationalized.
+
+> *Every EUR 1 spent on customer retention through visibility saves EUR 5-25 in acquisition costs. Every customer you keep is a customer your competitor cannot upsell.*
+
+---
+
+### What It Generates: New Revenue Through Upselling and Expansion
+
+The Transparency Portal does not just prevent loss. It creates a mechanism for growth. When customers can see exactly what services they consume, how those services perform, and where gaps exist, they buy more.
+
+**The upsell mechanics:**
+
+| Portal Feature | Upsell Trigger | Example |
+|----------------|---------------|---------|
+| Security posture dashboard | Customer CISO sees 12 critical vulnerabilities and asks: "Can you manage our patching?" | Security managed services add-on: EUR 50-200K/year |
+| SLA compliance by service | CTO sees 99.95% on cloud but 99.8% on workplace and asks: "Can you bring workplace up to the same level?" | Workplace modernization project: EUR 200-500K |
+| Cost vs. budget breakdown | CFO sees cloud spend trending 15% over budget and asks: "Can you optimize this?" | FinOps engagement: EUR 100-300K/year |
+| Backup success rates | Compliance officer sees 92% backup success and asks: "How do we get to 99%?" | Enhanced backup service: EUR 50-150K/year |
+| Certificate expiry tracking | CISO sees 3 certificates expiring within 30 days and asks: "Can you automate certificate lifecycle?" | Certificate management service: EUR 30-80K/year |
+
+**Revenue projection from upselling:**
+
+| Scenario | Customers Who Upsell | Average Upsell Value | Annual Revenue | Assumptions |
+|----------|---------------------|---------------------|----------------|-------------|
+| Conservative (Year 1 pilot) | 5 of 10 pilot customers | EUR 150,000 | EUR 750,000 | 50% of pilot customers identify at least one gap; average gap translates to a mid-range service add-on |
+| Moderate (Year 2 rollout) | 45 of 450 customers (10%) | EUR 120,000 | EUR 5,400,000 | Rolled out to half the customer base; 10% upsell rate is below the industry benchmark of 50% expansion revenue from existing accounts |
+| Scaled (Year 3 full base) | 135 of 900 customers (15%) | EUR 100,000 | EUR 13,500,000 | Full base access; decreasing average because smaller customers upsell smaller amounts |
+
+**Assumption explained:** The upsell rates (10-15% of customers) are deliberately conservative. Industry data shows that regular Quarterly Business Reviews -- which the portal effectively automates and makes continuous -- correlate with 33% higher expansion revenue. Firms with dedicated customer success programs generate over 50% of new ARR from existing accounts. A portal that surfaces gaps 24/7 instead of once per quarter should exceed, not trail, these benchmarks.
+
+---
+
+### The Complete P&L: Three-Year Financial Summary
+
+| Line Item | Year 1 | Year 2 | Year 3 | 3-Year Total |
+|-----------|--------|--------|--------|--------------|
+| **Investment** | | | | |
+| Team cost | EUR 694,000 | EUR 232,500 | EUR 232,500 | EUR 1,159,000 |
+| Infrastructure | EUR 48,000 | EUR 48,000 | EUR 48,000 | EUR 144,000 |
+| **Total investment** | **EUR 742,000** | **EUR 280,500** | **EUR 280,500** | **EUR 1,303,000** |
+| | | | | |
+| **Returns (conservative scenario)** | | | | |
+| Preserved revenue (churn prevention) | EUR 18,000,000 | EUR 22,000,000 | EUR 22,000,000 | EUR 62,000,000 |
+| New revenue (upselling) | EUR 750,000 | EUR 5,400,000 | EUR 13,500,000 | EUR 19,650,000 |
+| Avoided acquisition costs (not replacing lost customers) | EUR 1,600,000 | EUR 2,000,000 | EUR 2,000,000 | EUR 5,600,000 |
+| **Total returns** | **EUR 20,350,000** | **EUR 29,400,000** | **EUR 37,500,000** | **EUR 87,250,000** |
+| | | | | |
+| **ROI** | **27:1** | **105:1** | **134:1** | **67:1** |
+
+Even if you halve every return estimate and double every cost estimate, the three-year ROI remains above 15:1. The math is not close.
+
+---
+
+## How the Portal Empowers Every Level of the Customer Organization
+
+A dashboard is only valuable if the right people use it. The Transparency Portal is designed for three distinct audiences within every customer organization -- and each audience has a different reason to trust T-Systems more after using it.
+
+### C-Level: From "Trust Me" to "See for Yourself"
+
+The CIO, CFO, and CEO do not want operational details. They want answers to three questions: Are we getting what we pay for? Are we secure? Are we on budget?
+
+| What C-Level Sees | Why It Matters | Trust Impact |
+|-------------------|----------------|-------------|
+| SLA compliance gauge at 99.999% with 12-month trend | Board-ready proof that the managed services investment delivers | Eliminates the "are we sure this vendor is performing?" board question |
+| Risk score with trend indicator (decreasing) | Quantified security posture they can report to auditors and regulators | Shifts CISO conversations from "we think we're safe" to "here are the numbers" |
+| Cost overview: current vs. budget with MoM trend | Financial transparency without waiting for monthly invoices | CFO sees value, not just cost -- a critical distinction at renewal time |
+| Zero Outage score and pillar breakdown | Executive summary of the quality program T-Systems runs on their behalf | Converts an internal T-Systems metric into a customer-facing trust signal |
+
+**The renewal conversation changes.** Instead of a service delivery manager presenting slides that say "we met SLA," the CIO opens a portal and says to their board: "Here is our live operational dashboard. SLA is at 99.999%. Security score is 87 and improving. We are 3% under budget." That CIO does not switch providers. They are armed with evidence that justifies their vendor choice.
+
+### Business Level: From Quarterly Reports to Continuous Insight
+
+Operations managers, service owners, and procurement leads need trend data to make decisions. They need to understand ticket patterns, project delivery timelines, and service utilization -- not once a quarter, but continuously.
+
+| What Business Users See | Why It Matters | Trust Impact |
+|------------------------|----------------|-------------|
+| Ticket volume trends: opened vs. resolved over 12 months | Proves the support model is working -- resolution keeps pace with volume | Stops the "we keep raising tickets and nothing happens" perception |
+| SLA compliance by individual service | Identifies which services over-deliver and which need attention | Shows T-Systems proactively manages service quality, not just overall averages |
+| Project delivery status with progress bars | Tracks transformation projects (cloud migration, SAP upgrades) in real time | Eliminates "where are we on the migration?" status request emails |
+| Cost breakdown by service category | Enables informed decisions about where to invest and where to cut | Empowers procurement to have data-driven conversations instead of adversarial negotiations |
+
+**The upsell trigger lives here.** When a business user sees that their SAP environment has 99.99% uptime but their workplace services are at 99.7%, they do not think "T-Systems is failing." They think "I should ask T-Systems to bring workplace up to the SAP standard." The portal converts a performance gap from a complaint into a purchase order.
+
+### Technical Level: From "What Happened?" to "What Is Happening?"
+
+CTOs, infrastructure architects, and security engineers need granular data. Latency metrics. Error rates. Certificate expiry countdowns. Patch compliance by category. These are the people who evaluate whether to renew based on technical competence -- and they form opinions from data, not slides.
+
+| What Technical Users See | Why It Matters | Trust Impact |
+|-------------------------|----------------|-------------|
+| System status grid: every service, real-time health | Single pane of glass across cloud, SAP, security, connectivity, workplace | Replaces "let me check with T-Systems" with "let me check the portal" |
+| Latency metrics: P50, P95, P99 with trend lines | Quantified performance evidence, not anecdotal | Engineers trust numbers. This gives them numbers. |
+| Certificate expiry table with days-until-expiry countdown | Proactive compliance visibility without manual tracking | Prevents the "our certificate expired and nobody told us" incident |
+| Patch compliance rates by category with progress bars | Shows percentage of estate patched, by OS/middleware/application | Audit-ready evidence for ISO 27001, SOC 2, and industry-specific compliance |
+| Backup success rates per service | Proves disaster recovery readiness with concrete percentages | Shifts backup conversations from "do we have backups?" to "backups are at 98.5%" |
+
+**The switching barrier lives here.** When a customer's technical team has integrated the Transparency Portal into their daily workflow -- when the CTO opens it every morning, when the security engineer references it in audit reports, when the infrastructure lead uses it to plan capacity -- switching providers means losing that visibility layer. The portal becomes operational infrastructure, not a nice-to-have. Every day of usage increases switching cost.
+
+> *The C-Level sees confidence. The business sees trends. The technical team sees proof. All three see a reason to stay.*
 
 ---
 
@@ -76,12 +259,14 @@ A Transparency Portal changes the equation:
 
 | Current State | With Transparency Portal |
 |---------------|--------------------------|
-| SLA data compiled manually for QBRs | Real-time SLA trends visible 24/7 |
+| SLA data compiled manually for QBRs (8-10 hours/week per account) | Real-time SLA trends visible 24/7, zero manual effort |
 | Incident notification: hours to days | Incident status page updates in real time |
 | Certificate expiry tracked internally | Customer sees countdown and compliance status |
 | Cost data delivered monthly in spreadsheets | Interactive cost vs. budget dashboard |
 | Security posture discussed in annual reviews | Live vulnerability count and patch compliance rates |
 | Backup success rates in internal monitoring | Customer-visible backup health per service |
+
+**Manual reporting savings alone justify part of the investment.** If T-Systems' service delivery managers spend 8-10 hours per week compiling reports per major account, and the portal automates 70% of that effort, the time savings across 100 major accounts is 560-700 hours per week -- roughly 15-18 FTEs worth of effort redirected from report compilation to value-added customer engagement.
 
 > *Zero Outage proves you can run IT at 99.999%. The Transparency Portal proves it to the customer who signs the renewal.*
 
@@ -141,14 +326,25 @@ The gap between "we have this data" and "the customer can see this data" is not 
 
 ## The Recommendation
 
-| Action | Timeline | Expected Impact |
-|--------|----------|-----------------|
-| Pilot the Transparency Portal with 5-10 flagship customers | Q2 2026 | Validate retention and satisfaction impact with measurable NPS delta |
-| Integrate with existing Zero Outage monitoring systems | Q3 2026 | Replace manual QBR reporting with self-service access |
-| Roll out to all enterprise customers | Q4 2026 | Establish "Transparency" as a T-Systems brand differentiator |
-| Extend to pre-sales: give prospects a demo portal during evaluation | Q1 2027 | Shorten sales cycles by making operational excellence self-evident |
+| Action | Timeline | Investment | Expected Impact |
+|--------|----------|------------|-----------------|
+| Pilot the Transparency Portal with 5-10 flagship customers | Q2 2026 | EUR 742K (Year 1 build) | Validate retention and satisfaction impact with measurable NPS delta |
+| Integrate with existing Zero Outage monitoring systems | Q3 2026 | Included in Year 1 | Replace manual QBR reporting with self-service access |
+| Roll out to all enterprise customers | Q4 2026 | EUR 281K/year (operate) | Establish "Transparency" as a T-Systems brand differentiator |
+| Extend to pre-sales: give prospects a demo portal during evaluation | Q1 2027 | Marginal | Shorten sales cycles by making operational excellence self-evident |
 
-The investment required is a fraction of what a single lost enterprise contract costs. The prototype exists. The data exists. The Zero Outage operational backbone exists.
+**The three-year financial case:**
+
+| Metric | Value |
+|--------|-------|
+| Total 3-year investment | EUR 1.3 million |
+| Preserved revenue (conservative, churn prevention) | EUR 62 million |
+| New revenue (upselling) | EUR 19.7 million |
+| Avoided acquisition costs | EUR 5.6 million |
+| **Total 3-year return** | **EUR 87.3 million** |
+| **ROI** | **67:1** |
+
+The prototype exists. The data exists. The Zero Outage operational backbone exists.
 
 What does not exist -- yet -- is the bridge between T-Systems' operational excellence and the customer's lived experience of it.
 
@@ -156,7 +352,7 @@ What does not exist -- yet -- is the bridge between T-Systems' operational excel
 
 ---
 
-**Thorsten Meyer** is a strategist who reads the filings so you don't have to. More at [ThorstenMeyerAI.com](https://thorstenmeyer.ai).
+**Thorsten Meyer** is an AI strategist who reads the filings so you don't have to.
 
 ---
 
@@ -181,3 +377,9 @@ What does not exist -- yet -- is the bridge between T-Systems' operational excel
 - [Grand View Research: Digital Twin Market](https://www.grandviewresearch.com/industry-analysis/digital-twin-market)
 - [Gartner: Top Trends Impacting I&O for 2026](https://www.gartner.com/en/newsroom/press-releases/2025-12-11-gartner-identifies-the-top-trends-impacting-infrastructure-and-operations-for-2026)
 - [SerpSculpt: B2B Customer Retention Statistics 2025](https://serpsculpt.com/b2b-customer-retention-statistics/)
+- [BrightGauge: SLA Metrics Reporting](https://www.brightgauge.com/blog/make-sla-metrics-reporting-easy)
+- [Glassdoor: Software Developer Salaries -- India, Hungary, Germany](https://www.glassdoor.com/Salaries/)
+- [PayScale: Salary Data by Country](https://www.payscale.com/research/)
+- [PWC Hungary Tax Summary 2025](https://taxsummaries.pwc.com/hungary/individual/other-taxes)
+- [FMC Group: Germany Employment Cost Guide](https://fmcgroup.com/employment-cost-germany/)
+- [Invesp: Customer Acquisition vs. Retention Costs](https://www.invespcro.com/blog/customer-acquisition-retention/)
