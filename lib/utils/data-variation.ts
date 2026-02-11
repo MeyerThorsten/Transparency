@@ -1,0 +1,230 @@
+/**
+ * Deterministic daily value perturbation and synthetic data growth.
+ *
+ * All randomness is seeded by the current UTC date so that values are
+ * stable within a single day but change day-to-day.
+ */
+
+import { getDaysDelta, getMonthsDelta, shiftMonth } from "./date-shift";
+
+/** Mulberry32 — fast 32-bit PRNG returning values in [0, 1). */
+export function mulberry32(seed: number): () => number {
+  let t = seed | 0;
+  return () => {
+    t = (t + 0x6d2b79f5) | 0;
+    let v = Math.imul(t ^ (t >>> 15), 1 | t);
+    v = (v + Math.imul(v ^ (v >>> 7), 61 | v)) ^ v;
+    return ((v ^ (v >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/** djb2 hash of a string → 32-bit unsigned integer. */
+function djb2(str: string): number {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) + hash + str.charCodeAt(i)) | 0;
+  }
+  return hash >>> 0;
+}
+
+/** Return a deterministic seed for today + key. Same day + key → same seed. */
+export function dayHash(key: string): number {
+  const today = new Date();
+  const dateStr = `${today.getUTCFullYear()}-${String(today.getUTCMonth() + 1).padStart(2, "0")}-${String(today.getUTCDate()).padStart(2, "0")}`;
+  return djb2(`${dateStr}|${key}`);
+}
+
+/**
+ * Nudge a numeric value by ±pct%, deterministic per key.
+ * Result is clamped to [min, max] if provided.
+ */
+export function perturb(
+  value: number,
+  pct: number,
+  key: string,
+  min?: number,
+  max?: number,
+): number {
+  const rng = mulberry32(dayHash(key));
+  const factor = 1 + (rng() * 2 - 1) * (pct / 100);
+  let result = value * factor;
+  if (min !== undefined) result = Math.max(min, result);
+  if (max !== undefined) result = Math.min(max, result);
+  return Math.round(result * 100) / 100;
+}
+
+/** Same as perturb but returns a rounded integer. */
+export function perturbInt(
+  value: number,
+  pct: number,
+  key: string,
+  min?: number,
+  max?: number,
+): number {
+  return Math.round(perturb(value, pct, key, min, max));
+}
+
+/**
+ * Nudge an integer by an absolute amount ±abs, deterministic per key.
+ * Result is clamped to [min, max] if provided.
+ */
+export function perturbAbsolute(
+  value: number,
+  abs: number,
+  key: string,
+  min?: number,
+  max?: number,
+): number {
+  const rng = mulberry32(dayHash(key));
+  const offset = Math.round((rng() * 2 - 1) * abs);
+  let result = value + offset;
+  if (min !== undefined) result = Math.max(min, result);
+  if (max !== undefined) result = Math.min(max, result);
+  return result;
+}
+
+/**
+ * Append synthetic months to a monthly time-series array.
+ * `monthField` is the key containing the "YYYY-MM" string.
+ * `generate` receives (month, rng) and returns a new item to append.
+ */
+export function extendMonthlyData<T extends Record<string, unknown>>(
+  items: T[],
+  monthField: keyof T,
+  generate: (month: string, rng: () => number) => T,
+): T[] {
+  const monthsDelta = getMonthsDelta();
+  if (monthsDelta === 0 || items.length === 0) return items;
+
+  const result = [...items];
+  const lastMonth = items[items.length - 1][monthField] as string;
+
+  // Parse the last shifted month and generate new ones
+  const [lastY, lastM] = lastMonth.split("-").map(Number);
+
+  for (let i = 1; i <= monthsDelta; i++) {
+    const d = new Date(Date.UTC(lastY, lastM - 1 + i, 1));
+    const y = d.getUTCFullYear();
+    const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+    const month = `${y}-${m}`;
+    const rng = mulberry32(dayHash(`extend|${month}`));
+    result.push(generate(month, rng));
+  }
+
+  return result;
+}
+
+/**
+ * Generate synthetic incidents that appear over elapsed weeks.
+ * Returns 1-2 per elapsed week, capped at `maxNew` total.
+ */
+export function generateSyntheticIncidents(
+  existingCount: number,
+  maxNew: number = 20,
+): Array<{
+  id: string;
+  title: string;
+  severity: "P1" | "P2" | "P3" | "P4";
+  status: "open" | "investigating" | "resolved" | "closed";
+  serviceId: string;
+  serviceName: string;
+  createdAt: string;
+  resolvedAt: string | null;
+  mttrMinutes: number | null;
+}> {
+  const daysDelta = getDaysDelta();
+  const weeksElapsed = Math.floor(daysDelta / 7);
+  if (weeksElapsed === 0) return [];
+
+  const titles = [
+    "Elevated API response times",
+    "Database connection pool exhaustion",
+    "Certificate renewal failure",
+    "Memory leak in worker process",
+    "DNS resolution timeouts",
+    "Load balancer health check failures",
+    "Storage IOPS throttling",
+    "Authentication service degradation",
+    "Cache invalidation storm",
+    "Network packet loss on subnet",
+    "Scheduled job execution delay",
+    "CDN origin connection errors",
+    "Message queue backlog buildup",
+    "TLS handshake failures",
+    "Container OOM kills detected",
+    "Backup job timeout",
+    "Service discovery propagation delay",
+    "Rate limiter misconfiguration",
+    "Log pipeline ingestion lag",
+    "Unexpected pod restarts",
+  ];
+
+  const services = [
+    { id: "svc-api", name: "API Gateway" },
+    { id: "svc-db", name: "Database Cluster" },
+    { id: "svc-auth", name: "Auth Service" },
+    { id: "svc-web", name: "Web Frontend" },
+    { id: "svc-queue", name: "Message Queue" },
+    { id: "svc-cache", name: "Cache Layer" },
+  ];
+
+  const severities: Array<"P1" | "P2" | "P3" | "P4"> = ["P1", "P2", "P3", "P4"];
+  const statuses: Array<"open" | "investigating" | "resolved" | "closed"> = [
+    "resolved",
+    "closed",
+    "resolved",
+    "open",
+  ];
+
+  const incidents: Array<{
+    id: string;
+    title: string;
+    severity: "P1" | "P2" | "P3" | "P4";
+    status: "open" | "investigating" | "resolved" | "closed";
+    serviceId: string;
+    serviceName: string;
+    createdAt: string;
+    resolvedAt: string | null;
+    mttrMinutes: number | null;
+  }> = [];
+
+  const rng = mulberry32(dayHash("synthetic-incidents"));
+
+  for (let w = 1; w <= weeksElapsed && incidents.length < maxNew; w++) {
+    const countThisWeek = rng() < 0.5 ? 1 : 2;
+    for (let j = 0; j < countThisWeek && incidents.length < maxNew; j++) {
+      const idx = incidents.length;
+      const titleIdx = Math.floor(rng() * titles.length);
+      const svcIdx = Math.floor(rng() * services.length);
+      const sevIdx = Math.floor(rng() * severities.length);
+      const statusIdx = Math.floor(rng() * statuses.length);
+      const status = statuses[statusIdx];
+
+      // Created sometime during that week
+      const daysAgo = daysDelta - (w * 7) + Math.floor(rng() * 7);
+      const created = new Date();
+      created.setUTCDate(created.getUTCDate() - Math.max(0, daysAgo));
+      created.setUTCHours(Math.floor(rng() * 24), Math.floor(rng() * 60), 0, 0);
+
+      const isResolved = status === "resolved" || status === "closed";
+      const mttr = isResolved ? Math.floor(30 + rng() * 300) : null;
+      const resolvedAt = isResolved
+        ? new Date(created.getTime() + (mttr! * 60000)).toISOString()
+        : null;
+
+      incidents.push({
+        id: `INC-SYN-${String(existingCount + idx + 1).padStart(3, "0")}`,
+        title: titles[titleIdx],
+        severity: severities[sevIdx],
+        status,
+        serviceId: services[svcIdx].id,
+        serviceName: services[svcIdx].name,
+        createdAt: created.toISOString(),
+        resolvedAt,
+        mttrMinutes: mttr,
+      });
+    }
+  }
+
+  return incidents;
+}

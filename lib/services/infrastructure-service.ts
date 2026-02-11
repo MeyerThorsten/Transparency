@@ -20,6 +20,7 @@ import {
   computeDaysUntilExpiry,
   computeCertificateStatus,
 } from "@/lib/utils/date-shift";
+import { perturb, perturbInt, perturbAbsolute, extendMonthlyData } from "@/lib/utils/data-variation";
 
 type InfraData = {
   resourceUtilization: ResourceUtilization[];
@@ -40,17 +41,34 @@ const data = infraData as Record<string, InfraData>;
 
 export async function getResourceUtilization(customerId: string): Promise<ResourceUtilization[]> {
   const items = data[customerId]?.resourceUtilization ?? [];
-  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
+  return items.map((i, idx) => ({
+    ...i,
+    timestamp: shiftDate(i.timestamp),
+    cpu: perturb(i.cpu, 3, `cpu|${idx}`, 0, 100),
+    memory: perturb(i.memory, 3, `memory|${idx}`, 0, 100),
+    disk: perturb(i.disk, 3, `disk|${idx}`, 0, 100),
+  }));
 }
 
 export async function getLatencyMetrics(customerId: string): Promise<LatencyMetric[]> {
   const items = data[customerId]?.latency ?? [];
-  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
+  return items.map((i, idx) => ({
+    ...i,
+    timestamp: shiftDate(i.timestamp),
+    p50: perturb(i.p50, 5, `p50|${idx}`, 0),
+    p95: perturb(i.p95, 5, `p95|${idx}`, 0),
+    p99: perturb(i.p99, 5, `p99|${idx}`, 0),
+  }));
 }
 
 export async function getNetworkThroughput(customerId: string): Promise<NetworkThroughput[]> {
   const items = data[customerId]?.networkThroughput ?? [];
-  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
+  return items.map((i, idx) => ({
+    ...i,
+    timestamp: shiftDate(i.timestamp),
+    inbound: perturb(i.inbound, 8, `inbound|${idx}`, 0),
+    outbound: perturb(i.outbound, 8, `outbound|${idx}`, 0),
+  }));
 }
 
 export async function getCertificates(customerId: string): Promise<CertificateInfo[]> {
@@ -69,30 +87,49 @@ export async function getCertificates(customerId: string): Promise<CertificateIn
 
 export async function getBackups(customerId: string): Promise<BackupStatus[]> {
   const items = data[customerId]?.backups ?? [];
-  return items.map((i) => ({
+  return items.map((i, idx) => ({
     ...i,
     lastBackup: shiftISODate(i.lastBackup),
     nextScheduled: shiftISODate(i.nextScheduled),
+    successRate: perturb(i.successRate, 1, `backupRate|${idx}`, 90, 100),
   }));
 }
 
 export async function getChangeCalendar(customerId: string): Promise<ChangeCalendarEntry[]> {
   const items = data[customerId]?.changeCalendar ?? [];
-  return items.map((i) => ({ ...i, date: shiftDate(i.date) }));
+  return items.map((i, idx) => ({
+    ...i,
+    date: shiftDate(i.date),
+    count: perturbAbsolute(i.count, 1, `changeCount|${idx}`, 0),
+  }));
 }
 
 export async function getErrorRates(customerId: string): Promise<ErrorRate[]> {
   const items = data[customerId]?.errorRates ?? [];
-  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
+  return items.map((i, idx) => ({
+    ...i,
+    timestamp: shiftDate(i.timestamp),
+    rate: perturb(i.rate, 10, `errorRate|${idx}`, 0, 5),
+  }));
 }
 
 export async function getDnsResolution(customerId: string): Promise<DnsResolution[]> {
   const items = data[customerId]?.dnsResolution ?? [];
-  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
+  return items.map((i, idx) => ({
+    ...i,
+    timestamp: shiftDate(i.timestamp),
+    avgMs: perturb(i.avgMs, 5, `dnsAvg|${idx}`, 0),
+  }));
 }
 
 export async function getPatchCompliance(customerId: string): Promise<PatchCompliance[]> {
-  return data[customerId]?.patchCompliance ?? [];
+  const items = data[customerId]?.patchCompliance ?? [];
+  return items.map((i, idx) => {
+    const delta = perturbAbsolute(0, 2, `patchDelta|${idx}`);
+    const compliant = Math.max(0, i.compliant + delta);
+    const nonCompliant = Math.max(0, i.nonCompliant - delta);
+    return { ...i, compliant, nonCompliant, total: compliant + nonCompliant };
+  });
 }
 
 export async function getPendingChanges(customerId: string): Promise<ChangeRecord[]> {
@@ -107,8 +144,21 @@ export async function getProjects(customerId: string): Promise<ProjectDelivery[]
 
 export async function getServiceUtilization(customerId: string): Promise<ServiceUtilization[]> {
   const items = data[customerId]?.serviceUtilization ?? [];
-  return items.map((i) => ({
-    ...i,
-    months: i.months.map((m) => ({ ...m, month: shiftMonth(m.month) })),
+  return items.map((svc) => ({
+    ...svc,
+    months: extendMonthlyData(
+      svc.months.map((m, idx) => ({
+        ...m,
+        month: shiftMonth(m.month),
+        usage: perturb(m.usage, 3, `svcUsage|${svc.serviceId}|${idx}`, 0),
+        capacity: perturb(m.capacity, 3, `svcCap|${svc.serviceId}|${idx}`, 0),
+      })),
+      "month",
+      (month, rng) => ({
+        month,
+        usage: Math.round(70 + rng() * 20),
+        capacity: Math.round(90 + rng() * 10),
+      }),
+    ),
   }));
 }
