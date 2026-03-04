@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import { WidgetSize } from "@/types";
 import AnomalyBadge from "@/components/ai/AnomalyBadge";
+import DataFreshness from "@/components/widgets/shared/DataFreshness";
 
 interface WidgetShellProps {
   title: string;
@@ -27,6 +28,9 @@ export default function WidgetShell({ title, size, children, loading, error, wid
         <div className="flex items-center gap-2">
           <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">{title}</h3>
           {widgetId && <AnomalyBadge widgetId={widgetId} />}
+          <div className="ml-auto">
+            <DataFreshness />
+          </div>
         </div>
       </div>
       <div className="p-5 min-h-[100px]">
