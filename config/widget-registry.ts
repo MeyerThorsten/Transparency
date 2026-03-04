@@ -44,10 +44,17 @@ const registry: Record<string, () => Promise<{ default: ComponentType }>> = {
   "dns-resolution-time": () => import("@/components/widgets/technical/DnsResolutionTime"),
 };
 
+const componentCache = new Map<string, ReturnType<typeof lazy>>();
+
 export function getWidgetComponent(id: string) {
+  const cached = componentCache.get(id);
+  if (cached) return cached;
+
   const loader = registry[id];
   if (!loader) {
     throw new Error(`Widget "${id}" not found in registry`);
   }
-  return lazy(loader);
+  const component = lazy(loader);
+  componentCache.set(id, component);
+  return component;
 }

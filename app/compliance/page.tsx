@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useCustomer } from "@/lib/customer-context";
 import { getSecurityPosture } from "@/lib/services/security-service";
 import { getPatchCompliance, getCertificates, getBackups } from "@/lib/services/infrastructure-service";
 import { SecurityPosture, PatchCompliance, CertificateInfo, BackupStatus } from "@/types";
 import WidgetShell from "@/components/widgets/WidgetShell";
+import AiSummaryWidget from "@/components/ai/AiSummaryWidget";
+import AiChatPanel from "@/components/ai/AiChatPanel";
 import StatusBadge from "@/components/widgets/shared/StatusBadge";
 import { DonutChart, BarList } from "@tremor/react";
 
@@ -262,10 +264,16 @@ function BackupStatusSection() {
 export default function CompliancePage() {
   return (
     <div className="space-y-6">
+      <Suspense fallback={<WidgetShell title="AI Summary" size="full" loading><div /></WidgetShell>}>
+        <WidgetShell title="AI Summary" size="full">
+          <AiSummaryWidget />
+        </WidgetShell>
+      </Suspense>
       <SecurityScore />
       <PatchComplianceSection />
       <CertificateStatus />
       <BackupStatusSection />
+      <AiChatPanel view="technical" />
     </div>
   );
 }

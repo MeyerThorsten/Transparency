@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useCustomer } from "@/lib/customer-context";
 import { getSlaHistory } from "@/lib/services/kpi-service";
 import { getIncidents } from "@/lib/services/incident-service";
@@ -8,6 +8,8 @@ import { getTicketVolume } from "@/lib/services/incident-service";
 import { getCostBreakdown } from "@/lib/services/cost-service";
 import { MonthlySla, Incident, TicketVolume, CostBreakdown } from "@/types";
 import WidgetShell from "@/components/widgets/WidgetShell";
+import AiSummaryWidget from "@/components/ai/AiSummaryWidget";
+import AiChatPanel from "@/components/ai/AiChatPanel";
 import StatusBadge from "@/components/widgets/shared/StatusBadge";
 import TrendIndicator from "@/components/widgets/shared/TrendIndicator";
 import { AreaChart, BarChart } from "@tremor/react";
@@ -303,10 +305,16 @@ function TicketTrends() {
 export default function ReportsPage() {
   return (
     <div className="space-y-6">
+      <Suspense fallback={<WidgetShell title="AI Summary" size="full" loading><div /></WidgetShell>}>
+        <WidgetShell title="AI Summary" size="full">
+          <AiSummaryWidget />
+        </WidgetShell>
+      </Suspense>
       <SlaPerformance />
       <IncidentReport />
       <CostSummary />
       <TicketTrends />
+      <AiChatPanel view="business" />
     </div>
   );
 }
