@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import { WidgetSize } from "@/types";
+import AnomalyBadge from "@/components/ai/AnomalyBadge";
 
 interface WidgetShellProps {
   title: string;
@@ -9,6 +10,7 @@ interface WidgetShellProps {
   children: ReactNode;
   loading?: boolean;
   error?: string | null;
+  widgetId?: string;
 }
 
 const sizeClasses: Record<WidgetSize, string> = {
@@ -18,11 +20,14 @@ const sizeClasses: Record<WidgetSize, string> = {
   full: "widget-full",
 };
 
-export default function WidgetShell({ title, size, children, loading, error }: WidgetShellProps) {
+export default function WidgetShell({ title, size, children, loading, error, widgetId }: WidgetShellProps) {
   return (
     <div className={`${sizeClasses[size]} bg-white dark:bg-[#1C1C27] rounded-xl border border-gray-200 dark:border-[#2E2E3D] shadow-sm overflow-hidden`}>
       <div className="px-5 py-4 border-b border-gray-100 dark:border-[#252533]">
-        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">{title}</h3>
+        <div className="flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">{title}</h3>
+          {widgetId && <AnomalyBadge widgetId={widgetId} />}
+        </div>
       </div>
       <div className="p-5 min-h-[100px]">
         {loading ? (
