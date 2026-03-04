@@ -205,11 +205,63 @@ WATSONX_REGION=eu-de
 - Monthly estimate: ~885,000 tokens/month — exceeds free tier
 - Mitigation: cache summary responses for 5 minutes, reducing summary calls by ~90% → ~110,000 tokens/month (within free tier)
 
-## Future: Anomaly Annotations (Phase 2)
+## Phase 2+3: Anomaly Detection & Predictive Insights (Implemented)
 
-Not built in this phase. Design sketch:
-- New BFF route `POST /api/ai/anomalies` gathers time-series data
-- Prompt asks watsonx.ai to identify unusual patterns
-- Response includes metric name, timestamp range, and description
-- Existing chart widgets receive anomaly data as optional prop
-- Rendered as colored badges or tooltip overlays on Tremor charts
+Built in Phase 2+3. Architecture:
+
+### Endpoint
+
+`POST /api/ai/insights` — single combined endpoint returns both anomalies and predictions. Uses 6-hour cache (data is daily granularity).
+
+### Data Flow
+
+1. `AnomalyProvider` context fetches `/api/ai/insights` once per page load
+2. BFF route calls `gatherInsightsContext()` which gathers all time-series data from 9 services
+3. Data compressed into statistical summaries (min/max/avg/trend/last3) to stay under ~500 input tokens
+4. watsonx.ai returns structured JSON with anomalies and predictions
+5. `parseInsightsResponse()` validates and sanitizes the LLM output
+6. Context shares data with all widgets via `useAnomalies()` hook
+
+### Components
+
+| Component | Purpose | Placement |
+|-----------|---------|-----------|
+| `AnomalyProvider` | Fetches insights once, shares via context | Wraps `WidgetGrid` |
+| `AnomalyBadge` | Shows anomaly count on widget headers | Inside `WidgetShell` header |
+| `AiAnomaliesWidget` | Full list of anomalies sorted by severity | Technical dashboard |
+| `AiPredictionsWidget` | Predictions with confidence badges | C-level & Business dashboards |
+
+### Token Budget (Updated)
+
+| Feature | Tokens/call | Calls/day | Monthly |
+|---------|------------|-----------|---------|
+| Summaries (Phase 1) | ~700 | ~20 | ~70K |
+| Chat (Phase 1) | ~800 | ~15 | ~40K |
+| **Insights (Phase 2+3)** | **~1,000** | **~4** | **~20K** |
+| **Total** | | | **~130K** (within 300K free tier) |
+
+### Files Added
+
+| File | Purpose |
+|------|---------|
+| `types/ai.ts` | `Anomaly`, `Prediction`, `AiInsightsResponse` types |
+| `lib/ai/gather-insights-context.ts` | Gathers all time-series data, compresses to stats |
+| `lib/ai/insights-prompts.ts` | System/user prompt for anomaly/prediction analysis |
+| `lib/ai/parse-insights.ts` | Validates and sanitizes LLM JSON output |
+| `lib/ai/mock-insights.ts` | Mock data: 4 anomalies, 3 predictions |
+| `lib/ai/insights.ts` | `generateInsights()` with 6-hour cache |
+| `app/api/ai/insights/route.ts` | BFF POST endpoint |
+| `components/ai/AnomalyContext.tsx` | React context provider + `useAnomalies` hook |
+| `components/ai/AnomalyBadge.tsx` | Severity-colored badge for widget headers |
+| `components/ai/AiAnomaliesWidget.tsx` | Anomaly list widget |
+| `components/ai/AiPredictionsWidget.tsx` | Predictions list widget |
+
+### Files Modified
+
+| File | Change |
+|------|--------|
+| `types/index.ts` | Added `export * from "./ai"` |
+| `components/widgets/WidgetShell.tsx` | Added `widgetId` prop + `AnomalyBadge` in header |
+| `components/widgets/WidgetGrid.tsx` | Wrapped in `AnomalyProvider`, passes `widgetId` |
+| `config/widget-registry.ts` | Registered `ai-anomalies`, `ai-predictions` |
+| `config/view-configs.ts` | Added widgets to dashboard views |
