@@ -261,9 +261,38 @@ function BackupStatusSection() {
   );
 }
 
+function ExportButtons() {
+  const handleExport = (format: string) => {
+    alert(`Export as ${format} — coming soon`);
+  };
+
+  return (
+    <div className="flex items-center gap-2">
+      <button
+        onClick={() => handleExport("PDF")}
+        className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] px-3 py-1.5 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-[#252533] transition-colors"
+      >
+        <i className="ri-file-pdf-line" />
+        Export PDF
+      </button>
+      <button
+        onClick={() => handleExport("CSV")}
+        className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] px-3 py-1.5 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-[#252533] transition-colors"
+      >
+        <i className="ri-file-excel-line" />
+        Export CSV
+      </button>
+    </div>
+  );
+}
+
 export default function CompliancePage() {
   return (
     <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Compliance</h1>
+        <ExportButtons />
+      </div>
       <Suspense fallback={<WidgetShell title="AI Summary" size="full" loading><div /></WidgetShell>}>
         <WidgetShell title="AI Summary" size="full">
           <AiSummaryWidget />
