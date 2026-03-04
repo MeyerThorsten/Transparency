@@ -29,37 +29,14 @@ The Transparency Portal becomes a fundamentally different product when it stops 
 
 The portal architecture uses a Backend-for-Frontend (BFF) pattern with an adapter factory that switches between mock data and live IBM services. This design means the portal works identically in both modes -- mock for demos and pre-sales, live for production customers.
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        CUSTOMER BROWSER                             │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐              │
-│  │ C-Level  │ │ Business │ │Technical │ │ AI Chat  │              │
-│  │ Widgets  │ │ Widgets  │ │ Widgets  │ │ (watsonx)│              │
-│  └────┬─────┘ └────┬─────┘ └────┬─────┘ └────┬─────┘              │
-│       └─────────────┴────────────┴─────────────┘                    │
-│                         fetch() calls                               │
-└──────────────────────────┬──────────────────────────────────────────┘
-                           │ HTTPS
-┌──────────────────────────▼──────────────────────────────────────────┐
-│                    BFF (Next.js API Routes)                          │
-│  ┌────────────────────────────────────────────────────────────────┐ │
-│  │                    Adapter Factory                              │ │
-│  │  DATA_SOURCE=mock → MockAdapter (current behavior)             │ │
-│  │  DATA_SOURCE=live → IBM Adapters (real API calls)              │ │
-│  └────┬──────────┬──────────┬──────────┬─────────────────────────┘ │
-│       │          │          │          │                            │
-│  ┌────▼───┐ ┌───▼────┐ ┌───▼─────┐ ┌──▼──────┐                   │
-│  │Instana │ │Concert │ │Turbono- │ │watsonx  │                   │
-│  │Adapter │ │Adapter │ │mic Adpt │ │.ai Adpt │                   │
-│  └────┬───┘ └───┬────┘ └───┬─────┘ └──┬──────┘                   │
-└───────┼─────────┼──────────┼──────────┼────────────────────────────┘
-        │         │          │          │  REST APIs
-   ┌────▼───┐ ┌───▼────┐ ┌───▼─────┐ ┌──▼──────┐
-   │IBM     │ │IBM     │ │IBM      │ │IBM      │
-   │Instana │ │Concert │ │Turbono- │ │watsonx  │
-   │        │ │        │ │mic      │ │.ai      │
-   └────────┘ └────────┘ └─────────┘ └─────────┘
-```
+| Layer | Component | Role |
+|-------|-----------|------|
+| **Customer Browser** | C-Level Widgets, Business Widgets, Technical Widgets, AI Chat (watsonx) | Role-based dashboards with 36 widgets, all fetching data via HTTPS |
+| **BFF (Next.js API Routes)** | Adapter Factory | Routes requests to mock or live adapters based on `DATA_SOURCE` environment variable |
+| **BFF — Adapters** | Instana Adapter, Concert Adapter, Turbonomic Adapter, watsonx.ai Adapter | Each adapter handles its own API calls, caching, rate limiting, and error handling |
+| **IBM Services** | IBM Instana, IBM Concert, IBM Turbonomic, IBM watsonx.ai | External REST APIs providing live infrastructure, security, optimization, and AI data |
+
+**Data flow:** Browser → HTTPS → BFF Adapter Factory → `DATA_SOURCE=mock` routes to MockAdapter (current) or `DATA_SOURCE=live` routes to IBM Adapters → IBM REST APIs.
 
 **Why the BFF is mandatory.** Widgets run in the customer's browser. IBM API credentials -- Instana API tokens, Concert service accounts, watsonx.ai keys -- cannot be exposed client-side. The BFF layer (Next.js API Routes) keeps all credentials server-side and proxies only sanitized, customer-scoped data to the browser.
 
@@ -80,33 +57,14 @@ The portal already integrates four AI features powered by IBM watsonx.ai, operat
 
 ### AI Feature Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    CUSTOMER BROWSER                       │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────────┐ │
-│  │ AI Summary   │ │ AI Chat      │ │ Anomaly Badges   │ │
-│  │ Widget       │ │ Panel        │ │ + Predictions    │ │
-│  └──────┬───────┘ └──────┬───────┘ └────────┬─────────┘ │
-│         └────────────────┼──────────────────┘            │
-│                   fetch() calls                           │
-└──────────────────────────┬────────────────────────────────┘
-                           │ HTTPS
-┌──────────────────────────▼────────────────────────────────┐
-│              BFF (Next.js API Routes)                      │
-│  ┌──────────────────────────────────────────────────────┐ │
-│  │  /api/ai/summary  → Context builder → watsonx.ai    │ │
-│  │  /api/ai/chat     → Prompt router  → watsonx.ai     │ │
-│  │  Anomaly detection  → Statistical analysis (local)   │ │
-│  │  Predictions        → Trend extrapolation (local)    │ │
-│  └──────────────────────────────────────────────────────┘ │
-└──────────────────────────┬────────────────────────────────┘
-                           │ REST API
-                    ┌──────▼──────┐
-                    │ IBM watsonx │
-                    │ .ai (Granite│
-                    │  models)    │
-                    └─────────────┘
-```
+| Layer | Component | Processing |
+|-------|-----------|------------|
+| **Customer Browser** | AI Summary Widget, AI Chat Panel, Anomaly Badges + Predictions | UI components fetch data via HTTPS to BFF routes |
+| **BFF (Next.js API Routes)** | `/api/ai/summary` | Context builder → watsonx.ai (generates role-specific summaries) |
+| | `/api/ai/chat` | Prompt router → watsonx.ai (handles NL Q&A) |
+| | Anomaly detection | Statistical analysis (runs locally, zero API tokens) |
+| | Predictions | Trend extrapolation (runs locally, zero API tokens) |
+| **External API** | IBM watsonx.ai (Granite models) | REST API for NL generation; switches from mock to live when `WATSONX_API_KEY` is set |
 
 ### The Four AI Features
 
