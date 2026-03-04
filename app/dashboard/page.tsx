@@ -42,7 +42,7 @@ function DashboardContent() {
     <>
       <ZeroOutageBanner />
       <WidgetGrid widgets={filteredWidgets} />
-      <AiChatPanel />
+      <AiChatPanel view={view} />
     </>
   );
 }

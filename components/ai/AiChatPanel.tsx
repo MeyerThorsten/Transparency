@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useCustomer } from "@/lib/customer-context";
-import { useSearchParams } from "next/navigation";
 import type { ViewType } from "@/types";
 
 interface Message {
@@ -10,10 +9,8 @@ interface Message {
   content: string;
 }
 
-export default function AiChatPanel() {
+export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: ViewType }) {
   const { customer } = useCustomer();
-  const searchParams = useSearchParams();
-  const view = (searchParams.get("view") as ViewType) || "c-level";
 
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);

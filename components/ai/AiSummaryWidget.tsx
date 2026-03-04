@@ -2,16 +2,32 @@
 
 import { useEffect, useState } from "react";
 import { useCustomer } from "@/lib/customer-context";
-import { useSearchParams } from "next/navigation";
 import type { ViewType } from "@/types";
+
+function getViewFromUrl(): ViewType {
+  if (typeof window === "undefined") return "c-level";
+  const params = new URLSearchParams(window.location.search);
+  return (params.get("view") as ViewType) || "c-level";
+}
 
 export default function AiSummaryWidget() {
   const { customer } = useCustomer();
-  const searchParams = useSearchParams();
-  const view = (searchParams.get("view") as ViewType) || "c-level";
+  const [view, setView] = useState<ViewType>(getViewFromUrl);
   const [summary, setSummary] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Listen for URL changes (popstate + custom event for pushState)
+  useEffect(() => {
+    const updateView = () => setView(getViewFromUrl());
+    window.addEventListener("popstate", updateView);
+    // Next.js router.push triggers popstate, but also check on interval as fallback
+    const interval = setInterval(updateView, 1000);
+    return () => {
+      window.removeEventListener("popstate", updateView);
+      clearInterval(interval);
+    };
+  }, []);
 
   useEffect(() => {
     if (!customer) return;
