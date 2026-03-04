@@ -7,6 +7,7 @@ import { viewConfigs } from "@/config/view-configs";
 import { useCustomer } from "@/lib/customer-context";
 import WidgetGrid from "@/components/widgets/WidgetGrid";
 import ZeroOutageBanner from "@/components/layout/ZeroOutageBanner";
+import AiChatPanel from "@/components/ai/AiChatPanel";
 
 function DashboardContent() {
   const searchParams = useSearchParams();
@@ -41,6 +42,7 @@ function DashboardContent() {
     <>
       <ZeroOutageBanner />
       <WidgetGrid widgets={filteredWidgets} />
+      <AiChatPanel />
     </>
   );
 }

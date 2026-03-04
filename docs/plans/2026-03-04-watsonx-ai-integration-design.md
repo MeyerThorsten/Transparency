@@ -34,14 +34,14 @@ Browser                         Vercel (server)                    IBM Cloud
 - **Hybrid approach (Approach C)**: Direct watsonx.ai API calls in BFF routes with `AI_PROVIDER` env toggle (`mock` | `watsonx`). No adapter class hierarchy — overkill for a single API surface.
 - **BFF routes required**: Widgets are client components; IBM credentials cannot be in client bundles.
 - **Mock fallback**: Development works without IBM credentials. Flip to real AI when provisioned.
-- **Model**: `ibm/granite-3-8b-instruct` — IBM's own, cheapest ($0.10/M tokens), fast, sufficient for structured summaries and data-aware Q&A.
+- **Model**: `ibm/granite-4-h-small` — IBM's latest Granite 4 model, replacing the deprecated granite-3-8b-instruct.
 
 ### Auth flow (watsonx mode)
 
 1. BFF route reads `WATSONX_API_KEY` from env
 2. Exchanges for bearer token via `POST https://iam.cloud.ibm.com/identity/token`
 3. Token cached for 55 minutes (expires after 60)
-4. Calls `POST https://{region}.ml.cloud.ibm.com/ml/v1/text/generation?version=2025-02-06`
+4. Calls `POST https://{region}.ml.cloud.ibm.com/ml/v1/text/chat?version=2025-02-06` (chat completions API)
 
 ## Feature 1: AI Summary Widget
 

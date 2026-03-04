@@ -2,6 +2,7 @@ import { WidgetConfig, ViewType } from "@/types";
 
 export const viewConfigs: Record<ViewType, WidgetConfig[]> = {
   "c-level": [
+    { id: "ai-summary", title: "AI Summary", size: "medium", category: "kpi" },
     { id: "sla-compliance-gauge", title: "SLA Compliance", size: "medium", category: "kpi" },
     { id: "zero-outage-score", title: "Zero Outage Score", size: "medium", category: "zero-outage" },
     { id: "service-health-overview", title: "Service Health Overview", size: "large", category: "services" },
@@ -12,6 +13,7 @@ export const viewConfigs: Record<ViewType, WidgetConfig[]> = {
     { id: "security-posture", title: "Security Posture", size: "small", category: "security" },
   ],
   business: [
+    { id: "ai-summary", title: "AI Summary", size: "medium", category: "kpi" },
     { id: "service-utilization", title: "Service Utilization", size: "medium", category: "services" },
     { id: "ticket-volume-trends", title: "Ticket Volume Trends", size: "medium", category: "incidents" },
     { id: "mttr-trends", title: "MTTR Trends", size: "medium", category: "incidents" },
@@ -24,6 +26,7 @@ export const viewConfigs: Record<ViewType, WidgetConfig[]> = {
     { id: "service-availability-trend", title: "Service Availability Trend", size: "full", category: "kpi" },
   ],
   technical: [
+    { id: "ai-summary", title: "AI Summary", size: "medium", category: "kpi" },
     { id: "system-status-grid", title: "System Status", size: "full", category: "services" },
     { id: "uptime-by-service", title: "Uptime by Service", size: "large", category: "kpi" },
     { id: "latency-metrics", title: "Latency Metrics", size: "medium", category: "infrastructure" },
