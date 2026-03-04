@@ -1,6 +1,6 @@
 # The EUR 80 Million Blind Spot: Why T-Systems' Best Work Is Invisible to Its Customers
 
-**By Thorsten Meyer | February 2026**
+**By Thorsten Meyer | March 2026**
 
 ---
 
@@ -205,7 +205,7 @@ This adds EUR 177,500 to Year 1, bringing the team cost from EUR 694,000 to EUR 
 | watsonx.ai | Standard | $1,050/mo base + tokens | EUR 18,400 | $1,050/month x 12 = $12,600 base. Plus ~$500/month estimated token usage for NL queries and summaries across 10 pilot customers = $6,000. Total $18,600 x 0.92 = EUR 17,112 + buffer = EUR 18,400. |
 | **Total IBM licenses** | | | **EUR 184,000** | EUR 82,800 + EUR 46,000 + EUR 36,800 + EUR 18,400 = EUR 184,000 |
 
-**Exchange rate assumption:** EUR 1 = USD 1.09 (i.e., USD 1 = EUR 0.92), based on February 2026 averages. IBM licenses are typically denominated in USD. For T-Systems as a Deutsche Telekom subsidiary with an existing IBM partnership, volume discounts of 15-25% are likely but NOT included in these estimates. Actual costs could be 15-25% lower.
+**Exchange rate assumption:** EUR 1 = USD 1.09 (i.e., USD 1 = EUR 0.92), based on March 2026 averages. IBM licenses are typically denominated in USD. For T-Systems as a Deutsche Telekom subsidiary with an existing IBM partnership, volume discounts of 15-25% are likely but NOT included in these estimates. Actual costs could be 15-25% lower.
 
 **Updated Year 2+ costs:** IBM licenses continue at EUR 184,000/year. The integration team reduces to 1 FTE backend developer (India, EUR 35,000) for adapter maintenance and 0.1 FTE IBM Platform Specialist (EUR 14,000) for quarterly reviews. This adds EUR 49,000 to the Year 2+ team cost, bringing it from EUR 232,500 to EUR 281,500 (EUR 232,500 + EUR 35,000 + EUR 14,000 = EUR 281,500).
 
