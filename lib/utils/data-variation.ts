@@ -83,6 +83,43 @@ export function perturbAbsolute(
   return result;
 }
 
+/** Returns a weekday factor: Mon-Fri higher (1.0-1.15), Sat-Sun lower (0.75-0.85) */
+export function weekdayFactor(dateStr: string): number {
+  const day = new Date(dateStr + "T00:00:00Z").getUTCDay(); // 0=Sun, 6=Sat
+  if (day === 0) return 0.78;
+  if (day === 6) return 0.82;
+  if (day === 1) return 1.12; // Monday ramp-up
+  if (day === 5) return 0.95; // Friday wind-down
+  return 1.0 + (day - 2) * 0.02; // Tue-Thu slight rise
+}
+
+/** Returns true ~8% of days, seeded by date string + seed */
+export function shouldSpike(dateStr: string, seed: string): boolean {
+  const hash = dayHash(`spike|${dateStr}|${seed}`);
+  const rng = mulberry32(hash);
+  return rng() < 0.08;
+}
+
+/** Returns spike multiplier 1.3-1.8 when spiking, 1.0 otherwise */
+export function spikeMultiplier(dateStr: string, seed: string): number {
+  if (!shouldSpike(dateStr, seed)) return 1.0;
+  const rng = mulberry32(dayHash(`spikeMul|${dateStr}|${seed}`));
+  return 1.3 + rng() * 0.5;
+}
+
+/** Seasonal cost factor: Q4 higher (year-end), Q1 lower (budget reset) */
+export function seasonalCostFactor(date: Date): number {
+  const month = date.getMonth(); // 0-indexed
+  const factors = [0.92, 0.94, 0.97, 1.0, 1.02, 1.0, 0.98, 1.01, 1.03, 1.05, 1.08, 1.12];
+  return factors[month];
+}
+
+/** Correlate metric B with metric A: when A spikes, B increases proportionally */
+export function correlateMetric(baseValue: number, correlationFactor: number, baseSpike: number): number {
+  const spillover = (baseSpike - 1.0) * correlationFactor;
+  return baseValue * (1.0 + spillover);
+}
+
 /**
  * Append synthetic months to a monthly time-series array.
  * Compares the last item's month against the current month and fills the gap.

@@ -20,7 +20,7 @@ import {
   computeDaysUntilExpiry,
   computeCertificateStatus,
 } from "@/lib/utils/date-shift";
-import { perturb, perturbInt, perturbAbsolute, extendMonthlyData, extendDailyData } from "@/lib/utils/data-variation";
+import { perturb, perturbInt, perturbAbsolute, extendMonthlyData, extendDailyData, weekdayFactor, spikeMultiplier, correlateMetric } from "@/lib/utils/data-variation";
 
 type InfraData = {
   resourceUtilization: ResourceUtilization[];
@@ -48,12 +48,14 @@ export async function getResourceUtilization(customerId: string): Promise<Resour
     memory: perturb(i.memory, 3, `memory|${idx}`, 0, 100),
     disk: perturb(i.disk, 3, `disk|${idx}`, 0, 100),
   }));
-  return extendDailyData(shifted, "timestamp", (date, rng, prev) => ({
-    timestamp: date,
-    cpu: Math.round(Math.max(0, Math.min(100, (prev.cpu as number) + (rng() * 10 - 5))) * 100) / 100,
-    memory: Math.round(Math.max(0, Math.min(100, (prev.memory as number) + (rng() * 6 - 3))) * 100) / 100,
-    disk: Math.round(Math.max(0, Math.min(100, (prev.disk as number) + (rng() * 2 - 0.5))) * 100) / 100,
-  }));
+  return extendDailyData(shifted, "timestamp", (date, rng, prev) => {
+    const wf = weekdayFactor(date);
+    const cpuSpike = spikeMultiplier(date, "cpu");
+    const cpu = Math.round(Math.max(0, Math.min(100, (prev.cpu as number) * wf * cpuSpike + (rng() * 10 - 5))) * 100) / 100;
+    const memory = Math.round(Math.max(0, Math.min(100, correlateMetric((prev.memory as number) * wf + (rng() * 6 - 3), 0.4, cpuSpike))) * 100) / 100;
+    const disk = Math.round(Math.max(0, Math.min(100, (prev.disk as number) + (rng() * 2 - 0.5))) * 100) / 100;
+    return { timestamp: date, cpu, memory, disk };
+  });
 }
 
 export async function getLatencyMetrics(customerId: string): Promise<LatencyMetric[]> {
@@ -65,12 +67,14 @@ export async function getLatencyMetrics(customerId: string): Promise<LatencyMetr
     p95: perturb(i.p95, 5, `p95|${idx}`, 0),
     p99: perturb(i.p99, 5, `p99|${idx}`, 0),
   }));
-  return extendDailyData(shifted, "timestamp", (date, rng, prev) => ({
-    timestamp: date,
-    p50: Math.round(Math.max(1, (prev.p50 as number) + (rng() * 4 - 2)) * 100) / 100,
-    p95: Math.round(Math.max(5, (prev.p95 as number) + (rng() * 10 - 5)) * 100) / 100,
-    p99: Math.round(Math.max(10, (prev.p99 as number) + (rng() * 30 - 15)) * 100) / 100,
-  }));
+  return extendDailyData(shifted, "timestamp", (date, rng, prev) => {
+    const cpuSpike = spikeMultiplier(date, "cpu");
+    const wf = weekdayFactor(date);
+    const p50 = Math.round(Math.max(1, (prev.p50 as number) * wf + (rng() * 4 - 2)) * 100) / 100;
+    const p95 = Math.round(Math.max(5, correlateMetric((prev.p95 as number) + (rng() * 10 - 5), 0.6, cpuSpike)) * 100) / 100;
+    const p99 = Math.round(Math.max(10, correlateMetric((prev.p99 as number) + (rng() * 30 - 15), 0.8, cpuSpike)) * 100) / 100;
+    return { timestamp: date, p50, p95, p99 };
+  });
 }
 
 export async function getNetworkThroughput(customerId: string): Promise<NetworkThroughput[]> {
@@ -137,11 +141,11 @@ export async function getErrorRates(customerId: string): Promise<ErrorRate[]> {
   }
   const extended: ErrorRate[] = [];
   for (const [, group] of byService) {
-    extended.push(...extendDailyData(group, "timestamp", (date, rng, prev) => ({
-      timestamp: date,
-      serviceName: prev.serviceName as string,
-      rate: Math.round(Math.max(0, Math.min(5, (prev.rate as number) + (rng() * 0.02 - 0.01))) * 1000) / 1000,
-    })));
+    extended.push(...extendDailyData(group, "timestamp", (date, rng, prev) => {
+      const cpuSpike = spikeMultiplier(date, "errors");
+      const rate = Math.round(Math.max(0, Math.min(5, correlateMetric((prev.rate as number) + (rng() * 0.02 - 0.01), 0.5, cpuSpike))) * 1000) / 1000;
+      return { timestamp: date, serviceName: prev.serviceName as string, rate };
+    }));
   }
   return extended;
 }
