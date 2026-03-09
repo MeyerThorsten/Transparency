@@ -7,6 +7,12 @@ const registry: Record<string, () => Promise<{ default: ComponentType }>> = {
   "ai-summary": () => import("@/components/ai/AiSummaryWidget"),
   "ai-anomalies": () => import("@/components/ai/AiAnomaliesWidget"),
   "ai-predictions": () => import("@/components/ai/AiPredictionsWidget"),
+  "ai-risk-briefing": () => import("@/components/ai/AiRiskBriefingWidget"),
+  "ai-cost-forecast": () => import("@/components/ai/AiCostForecastWidget"),
+  "ai-root-cause-patterns": () => import("@/components/ai/AiRootCausePatternsWidget"),
+  "ai-sla-risk-advisor": () => import("@/components/ai/AiSlaRiskAdvisorWidget"),
+  "ai-capacity-planner": () => import("@/components/ai/AiCapacityPlannerWidget"),
+  "ai-change-impact": () => import("@/components/ai/AiChangeImpactWidget"),
 
   // Optimization
   "optimization-recommendations": () => import("@/components/widgets/OptimizationWidget"),
