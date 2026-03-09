@@ -13,6 +13,7 @@ interface WidgetShellProps {
   loading?: boolean;
   error?: string | null;
   widgetId?: string;
+  dragListeners?: Record<string, Function>;
 }
 
 const sizeClasses: Record<WidgetSize, string> = {
@@ -22,7 +23,7 @@ const sizeClasses: Record<WidgetSize, string> = {
   full: "widget-full",
 };
 
-export default function WidgetShell({ title, size, children, loading, error, widgetId }: WidgetShellProps) {
+export default function WidgetShell({ title, size, children, loading, error, widgetId, dragListeners }: WidgetShellProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -30,6 +31,14 @@ export default function WidgetShell({ title, size, children, loading, error, wid
       <div className={`${sizeClasses[size]} bg-white dark:bg-[#1C1C27] rounded-xl border border-gray-200 dark:border-[#2E2E3D] shadow-sm overflow-hidden`}>
         <div className="px-5 py-4 border-b border-gray-100 dark:border-[#252533]">
           <div className="flex items-center gap-2">
+            {dragListeners && (
+              <button
+                className="cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-400 touch-none"
+                {...dragListeners}
+              >
+                <i className="ri-draggable text-sm" />
+              </button>
+            )}
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">{title}</h3>
             {widgetId && <AnomalyBadge widgetId={widgetId} />}
             <div className="ml-auto flex items-center gap-2">

@@ -1,38 +1,55 @@
 "use client";
 
-import { Suspense } from "react";
 import { WidgetConfig } from "@/types";
-import { getWidgetComponent } from "@/config/widget-registry";
-import WidgetShell from "./WidgetShell";
 import { AnomalyProvider } from "@/components/ai/AnomalyContext";
+import {
+  DndContext,
+  closestCenter,
+  DragEndEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable";
+import SortableWidget from "./SortableWidget";
 
 interface WidgetGridProps {
   widgets: WidgetConfig[];
+  onReorder?: (activeId: string, overId: string) => void;
 }
 
-function WidgetFallback({ title, size }: { title: string; size: string }) {
-  return (
-    <WidgetShell title={title} size={size as "small" | "medium" | "large" | "full"} loading>
-      <div />
-    </WidgetShell>
+export default function WidgetGrid({ widgets, onReorder }: WidgetGridProps) {
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 8 },
+    })
   );
-}
 
-export default function WidgetGrid({ widgets }: WidgetGridProps) {
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (over && active.id !== over.id && onReorder) {
+      onReorder(active.id as string, over.id as string);
+    }
+  }
+
   return (
     <AnomalyProvider>
-      <div className="widget-grid">
-        {widgets.map((config) => {
-          const Component = getWidgetComponent(config.id);
-          return (
-            <Suspense key={config.id} fallback={<WidgetFallback title={config.title} size={config.size} />}>
-              <WidgetShell title={config.title} size={config.size} widgetId={config.id}>
-                <Component />
-              </WidgetShell>
-            </Suspense>
-          );
-        })}
-      </div>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext
+          items={widgets.map((w) => w.id)}
+          strategy={rectSortingStrategy}
+        >
+          <div className="widget-grid">
+            {widgets.map((config) => (
+              <SortableWidget key={config.id} config={config} />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
     </AnomalyProvider>
   );
 }

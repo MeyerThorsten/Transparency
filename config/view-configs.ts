@@ -4,6 +4,8 @@ export const viewConfigs: Record<ViewType, WidgetConfig[]> = {
   "c-level": [
     { id: "ai-summary", title: "AI Summary", size: "medium", category: "kpi" },
     { id: "ai-predictions", title: "AI Predictive Insights", size: "medium", category: "ai" },
+    { id: "ai-risk-briefing", title: "AI Risk Briefing", size: "medium", category: "ai" },
+    { id: "ai-cost-forecast", title: "AI Cost Forecast", size: "medium", category: "ai" },
     { id: "sla-compliance-gauge", title: "SLA Compliance", size: "medium", category: "kpi" },
     { id: "zero-outage-score", title: "Zero Outage Score", size: "medium", category: "zero-outage" },
     { id: "service-health-overview", title: "Service Health Overview", size: "large", category: "services" },
@@ -17,6 +19,8 @@ export const viewConfigs: Record<ViewType, WidgetConfig[]> = {
   business: [
     { id: "ai-summary", title: "AI Summary", size: "medium", category: "kpi" },
     { id: "ai-predictions", title: "AI Predictive Insights", size: "medium", category: "ai" },
+    { id: "ai-root-cause-patterns", title: "AI Root Cause Patterns", size: "medium", category: "ai" },
+    { id: "ai-sla-risk-advisor", title: "AI SLA Risk Advisor", size: "medium", category: "ai" },
     { id: "service-utilization", title: "Service Utilization", size: "medium", category: "services" },
     { id: "ticket-volume-trends", title: "Ticket Volume Trends", size: "medium", category: "incidents" },
     { id: "mttr-trends", title: "MTTR Trends", size: "medium", category: "incidents" },
@@ -31,6 +35,8 @@ export const viewConfigs: Record<ViewType, WidgetConfig[]> = {
   technical: [
     { id: "ai-summary", title: "AI Summary", size: "medium", category: "kpi" },
     { id: "ai-anomalies", title: "AI Anomaly Detection", size: "medium", category: "ai" },
+    { id: "ai-capacity-planner", title: "AI Capacity Planner", size: "large", category: "ai" },
+    { id: "ai-change-impact", title: "AI Change Impact Analyzer", size: "medium", category: "ai" },
     { id: "system-status-grid", title: "System Status", size: "full", category: "services" },
     { id: "uptime-by-service", title: "Uptime by Service", size: "large", category: "kpi" },
     { id: "latency-metrics", title: "Latency Metrics", size: "medium", category: "infrastructure" },

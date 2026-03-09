@@ -1,5 +1,5 @@
 {
-  "name": "transparency-temp",
+  "name": "clarityops",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "@remixicon/react": "^4.9.0",
     "@tremor/react": "^3.18.7",
     "class-variance-authority": "^0.7.1",
