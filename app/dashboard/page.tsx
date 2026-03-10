@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { ViewType } from "@/types";
 import { viewConfigs } from "@/config/view-configs";
 import { useCustomer } from "@/lib/customer-context";
@@ -11,6 +11,7 @@ import WidgetGrid from "@/components/widgets/WidgetGrid";
 import ZeroOutageBanner from "@/components/layout/ZeroOutageBanner";
 import AiChatPanel from "@/components/ai/AiChatPanel";
 import Header from "@/components/layout/Header";
+import WidgetSearch from "@/components/layout/WidgetSearch";
 
 function DashboardContent() {
   const searchParams = useSearchParams();
@@ -19,6 +20,8 @@ function DashboardContent() {
   const defaultWidgets = viewConfigs[view] || viewConfigs["c-level"];
   const { widgets: orderedWidgets, reorder, reset, hasCustomOrder } = useWidgetOrder(view, defaultWidgets);
   const { isFavorite, toggleFavorite } = useFavorites(view);
+  const [searchText, setSearchText] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   if (loading) {
     return (
@@ -54,12 +57,36 @@ function DashboardContent() {
     return aFav - bFav;
   });
 
+  const categories = [...new Set(sortedWidgets.map((w) => w.category))];
+
+  const dimmedWidgets = new Set<string>();
+  if (searchText || selectedCategories.length > 0) {
+    sortedWidgets.forEach((w) => {
+      const matchesSearch = !searchText || w.title.toLowerCase().includes(searchText.toLowerCase());
+      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(w.category);
+      if (!matchesSearch || !matchesCategory) dimmedWidgets.add(w.id);
+    });
+  }
+
   return (
     <>
       <Header onResetLayout={reset} hasCustomOrder={hasCustomOrder} />
       <main className="p-6">
         <ZeroOutageBanner />
-        <WidgetGrid widgets={sortedWidgets} onReorder={reorder} isFavorite={isFavorite} toggleFavorite={toggleFavorite} />
+        <WidgetSearch
+          categories={categories}
+          onFilter={(text, cats) => {
+            setSearchText(text);
+            setSelectedCategories(cats);
+          }}
+        />
+        <WidgetGrid
+          widgets={sortedWidgets}
+          onReorder={reorder}
+          isFavorite={isFavorite}
+          toggleFavorite={toggleFavorite}
+          dimmedWidgets={dimmedWidgets}
+        />
         <AiChatPanel view={view} />
       </main>
     </>

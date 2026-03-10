@@ -18,9 +18,10 @@ interface WidgetGridProps {
   onReorder?: (activeId: string, overId: string) => void;
   isFavorite?: (id: string) => boolean;
   toggleFavorite?: (id: string) => void;
+  dimmedWidgets?: Set<string>;
 }
 
-export default function WidgetGrid({ widgets, onReorder, isFavorite, toggleFavorite }: WidgetGridProps) {
+export default function WidgetGrid({ widgets, onReorder, isFavorite, toggleFavorite, dimmedWidgets }: WidgetGridProps) {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: { distance: 8 },
@@ -53,6 +54,7 @@ export default function WidgetGrid({ widgets, onReorder, isFavorite, toggleFavor
                 index={index}
                 isFavorite={isFavorite ? isFavorite(config.id) : undefined}
                 onToggleFavorite={toggleFavorite ? () => toggleFavorite(config.id) : undefined}
+                dimmed={dimmedWidgets?.has(config.id)}
               />
             ))}
           </div>
