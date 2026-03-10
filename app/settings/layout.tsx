@@ -3,15 +3,22 @@
 import Sidebar from "@/components/layout/Sidebar";
 import ThemeToggle from "@/components/layout/ThemeToggle";
 import { CustomerProvider } from "@/lib/customer-context";
+import { SidebarProvider, useSidebar } from "@/lib/sidebar-context";
 import { useCustomer } from "@/lib/customer-context";
-import { RiNotification3Line, RiUser3Line } from "@remixicon/react";
+import { RiNotification3Line, RiUser3Line, RiMenuLine } from "@remixicon/react";
 
 function SettingsHeader() {
   const { customer } = useCustomer();
+  const { toggle } = useSidebar();
 
   return (
     <header className="h-16 bg-white dark:bg-[#1C1C27] border-b border-gray-200 dark:border-[#2E2E3D] flex items-center justify-between px-6 sticky top-0 z-20">
-      <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Settings</h1>
+      <div className="flex items-center gap-4">
+        <button onClick={toggle} className="lg:hidden p-2 -ml-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+          <RiMenuLine className="w-5 h-5" />
+        </button>
+        <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Settings</h1>
+      </div>
       <div className="flex items-center gap-4">
         {customer && (
           <span className="text-sm text-gray-500 dark:text-gray-400 hidden md:block">
@@ -31,16 +38,25 @@ function SettingsHeader() {
   );
 }
 
+function ContentArea({ children }: { children: React.ReactNode }) {
+  const { collapsed } = useSidebar();
+  return (
+    <div className={`transition-[margin] duration-200 ${collapsed ? "lg:ml-[68px]" : "lg:ml-[260px]"}`}>
+      <SettingsHeader />
+      <main className="p-6">{children}</main>
+    </div>
+  );
+}
+
 export default function SettingsLayout({ children }: { children: React.ReactNode }) {
   return (
     <CustomerProvider>
-      <div className="min-h-screen bg-gray-50 dark:bg-[#111118]">
-        <Sidebar />
-        <div className="ml-[260px]">
-          <SettingsHeader />
-          <main className="p-6">{children}</main>
+      <SidebarProvider>
+        <div className="min-h-screen bg-gray-50 dark:bg-[#111118]">
+          <Sidebar />
+          <ContentArea>{children}</ContentArea>
         </div>
-      </div>
+      </SidebarProvider>
     </CustomerProvider>
   );
 }
