@@ -144,13 +144,12 @@ export default function Home() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Copy */}
             <div className="max-w-xl">
-              <Image src="/logo.png" alt="All Is Well" width={360} height={80} className="h-16 w-auto brightness-0 invert" priority />
-              <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                All Is Well
-              </h1>
-              <p className="mt-1 text-sm font-semibold uppercase tracking-widest text-white/70">
+              <p className="text-sm font-semibold uppercase tracking-widest text-white/70">
                 Your End-to-End Digital Health Dashboard
               </p>
+              <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                All Is Well
+              </h1>
               <p className="mt-6 text-lg leading-relaxed text-white/80">
                 AI-powered infrastructure transparency for managed service
                 providers. Real-time monitoring, anomaly detection, and
@@ -423,10 +422,8 @@ export default function Home() {
 
       {/* ── Footer ───────────────────────────────────────────── */}
       <footer className="border-t border-gray-200 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#111118] py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 text-center text-sm text-gray-400 dark:text-gray-500">
-          <div className="font-semibold text-gray-600 dark:text-gray-400">
-            All Is Well
-          </div>
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 text-center text-sm text-gray-400 dark:text-gray-500">
+          <Image src="/logo.png" alt="All Is Well" width={280} height={62} className="h-14 w-auto" />
           <p>&copy; {new Date().getFullYear()} Thorsten Meyer</p>
         </div>
       </footer>
