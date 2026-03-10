@@ -7,6 +7,7 @@ import AutoRefreshToggle from "./AutoRefreshToggle";
 import { RiNotification3Line, RiUser3Line, RiMenuLine } from "@remixicon/react";
 import { useCustomer } from "@/lib/customer-context";
 import { useSidebar } from "@/lib/sidebar-context";
+import { useNotifications } from "@/lib/notification-context";
 
 export default function Header({
   onResetLayout,
@@ -17,6 +18,7 @@ export default function Header({
 }) {
   const { customer } = useCustomer();
   const { toggle } = useSidebar();
+  const { unreadCount, togglePanel } = useNotifications();
 
   return (
     <header className="h-16 bg-white dark:bg-[#1C1C27] border-b border-gray-200 dark:border-[#2E2E3D] flex items-center justify-between px-6 sticky top-0 z-20">
@@ -51,9 +53,17 @@ export default function Header({
           </span>
         )}
         <ThemeToggle />
-        <button className="relative p-2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors">
+        <button
+          onClick={togglePanel}
+          className="relative p-2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+          aria-label={`Notifications${unreadCount > 0 ? `, ${unreadCount} unread` : ""}`}
+        >
           <RiNotification3Line className="w-5 h-5" />
-          <span className="absolute top-1 right-1 w-2 h-2 bg-magenta rounded-full" />
+          {unreadCount > 0 && (
+            <span className="absolute top-1 right-1 min-w-[16px] h-4 px-0.5 bg-magenta rounded-full flex items-center justify-center text-[10px] font-bold text-white leading-none">
+              {unreadCount > 9 ? "9+" : unreadCount}
+            </span>
+          )}
         </button>
         <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-[#262633] flex items-center justify-center">
           <RiUser3Line className="w-4 h-4 text-gray-500 dark:text-gray-400" />

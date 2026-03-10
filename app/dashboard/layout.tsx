@@ -1,9 +1,11 @@
 "use client";
 
 import Sidebar from "@/components/layout/Sidebar";
+import NotificationPanel from "@/components/layout/NotificationPanel";
 import { CustomerProvider } from "@/lib/customer-context";
 import { SidebarProvider, useSidebar } from "@/lib/sidebar-context";
 import { RefreshProvider } from "@/lib/refresh-context";
+import { NotificationProvider } from "@/lib/notification-context";
 
 function ContentArea({ children }: { children: React.ReactNode }) {
   const { collapsed } = useSidebar();
@@ -19,14 +21,17 @@ function ContentArea({ children }: { children: React.ReactNode }) {
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <RefreshProvider>
-      <CustomerProvider>
-        <SidebarProvider>
-          <div className="min-h-screen bg-gray-50 dark:bg-[#111118]">
-            <Sidebar />
-            <ContentArea>{children}</ContentArea>
-          </div>
-        </SidebarProvider>
-      </CustomerProvider>
+      <NotificationProvider>
+        <CustomerProvider>
+          <SidebarProvider>
+            <div className="min-h-screen bg-gray-50 dark:bg-[#111118]">
+              <Sidebar />
+              <ContentArea>{children}</ContentArea>
+              <NotificationPanel />
+            </div>
+          </SidebarProvider>
+        </CustomerProvider>
+      </NotificationProvider>
     </RefreshProvider>
   );
 }
