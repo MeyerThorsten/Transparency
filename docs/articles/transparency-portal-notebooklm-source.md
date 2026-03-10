@@ -1,18 +1,20 @@
-# The Transparency Portal: AI-Powered Infrastructure Visibility for Managed Service Customers
+# All Is Well: AI-Powered Infrastructure Visibility for Managed Service Customers
 
-## What is the Transparency Portal?
+*Your End-to-End Digital Health Dashboard*
 
-The Transparency Portal is a real-time, AI-powered dashboard that gives managed service provider customers complete visibility into their IT infrastructure. Instead of waiting for monthly PDF reports that are already outdated when they arrive, customers can log in at any time and see exactly how their infrastructure is performing — right now, this minute.
+## What is All Is Well?
 
-Think of it like this: imagine you're paying a company to manage all your servers, networks, and cloud infrastructure. Today, you get a static report once a month. You have no idea if something broke last Tuesday or if your costs are creeping up. The Transparency Portal changes that completely. It's a live window into everything that matters about your infrastructure.
+All Is Well is a real-time, AI-powered dashboard that gives managed service provider customers complete visibility into their IT infrastructure. Instead of waiting for monthly PDF reports that are already outdated when they arrive, customers can log in at any time and see exactly how their infrastructure is performing — right now, this minute.
+
+Think of it like this: imagine you're paying a company to manage all your servers, networks, and cloud infrastructure. Today, you get a static report once a month. You have no idea if something broke last Tuesday or if your costs are creeping up. All Is Well changes that completely. It's a live window into everything that matters about your infrastructure.
 
 ## Who is this for?
 
-The portal serves three very different types of users, and this is one of its most interesting design decisions. Not everyone needs the same information presented the same way.
+All Is Well serves three very different types of users, and this is one of its most interesting design decisions. Not everyone needs the same information presented the same way.
 
 ### The C-Level Executive (CTO, CIO, CFO)
 
-A CTO doesn't want to see server CPU graphs. They want to know: Are we meeting our SLA targets? Are we on budget? Are there any risks I should know about? The C-Level view shows 13 widgets focused on executive KPIs. Things like overall service availability trending over time, cost overview with budget versus actual spending, SLA compliance status, and strategic optimization recommendations. When a CTO opens the portal, the AI immediately generates a plain-English summary like: "Your SLA is currently at 99.94%, but there's a medium risk of breaching the 99.9% target within 14 days due to rising error rates in the Auth Service. Current spending is 2.3% over budget with a projected 4.5% overrun by month end."
+A CTO doesn't want to see server CPU graphs. They want to know: Are we meeting our SLA targets? Are we on budget? Are there any risks I should know about? The C-Level view shows 13 widgets focused on executive KPIs. Things like overall service availability trending over time, cost overview with budget versus actual spending, SLA compliance status, and strategic optimization recommendations. When a CTO opens All Is Well, the AI immediately generates a plain-English summary like: "Your SLA is currently at 99.94%, but there's a medium risk of breaching the 99.9% target within 14 days due to rising error rates in the Auth Service. Current spending is 2.3% over budget with a projected 4.5% overrun by month end."
 
 ### The Business Stakeholder (Service Manager, Account Manager)
 
@@ -24,7 +26,7 @@ Technical users want the deep data. Their view has 17 widgets showing real-time 
 
 ## The Four AI Features — What Makes This Special
 
-The portal has 44 interactive widgets showing charts, graphs, KPIs, and tables. But what truly sets it apart are four AI features powered by IBM watsonx.ai with Granite foundation models.
+All Is Well has 44 interactive widgets showing charts, graphs, KPIs, and tables. But what truly sets it apart are four AI features powered by IBM watsonx.ai with Granite foundation models.
 
 ### Feature 1: AI-Powered Dashboard Summaries
 
@@ -60,21 +62,21 @@ This creates a fundamental tension in the MSP-customer relationship. The custome
 
 ### From Reactive to Proactive
 
-Without the Transparency Portal, the typical flow is: something breaks, the MSP detects it (hopefully), the MSP fixes it, the customer finds out about it in next month's report. With the portal, the flow becomes: the AI predicts a potential issue in 14 days, the customer sees the prediction, the MSP and customer proactively address it together, the issue never happens. This shift from reactive to proactive management is transformative. It reduces downtime, prevents SLA breaches, avoids unexpected costs, and fundamentally changes the MSP-customer relationship from vendor-client to collaborative partnership.
+Without All Is Well, the typical flow is: something breaks, the MSP detects it (hopefully), the MSP fixes it, the customer finds out about it in next month's report. With All Is Well, the flow becomes: the AI predicts a potential issue in 14 days, the customer sees the prediction, the MSP and customer proactively address it together, the issue never happens. This shift from reactive to proactive management is transformative. It reduces downtime, prevents SLA breaches, avoids unexpected costs, and fundamentally changes the MSP-customer relationship from vendor-client to collaborative partnership.
 
 ### The Role-Aware AI Difference
 
-Most dashboards show the same data to everyone and expect each user to find what's relevant to them. This is like giving everyone in a company the same 50-page report and hoping they'll each find the three pages that matter to them. The Transparency Portal's role-aware AI flips this. It understands who you are and what you care about, and it surfaces the right information with the right framing. A CFO seeing "projected 4.5% budget overrun" is immediately actionable. That same person seeing "CPU at 89.3%" means nothing without context. The AI provides that bridge.
+Most dashboards show the same data to everyone and expect each user to find what's relevant to them. This is like giving everyone in a company the same 50-page report and hoping they'll each find the three pages that matter to them. All Is Well's role-aware AI flips this. It understands who you are and what you care about, and it surfaces the right information with the right framing. A CFO seeing "projected 4.5% budget overrun" is immediately actionable. That same person seeing "CPU at 89.3%" means nothing without context. The AI provides that bridge.
 
 ## The Technology Behind It
 
-The portal is built with Next.js, a modern web framework that handles both the frontend (what users see) and the backend (the AI integration). The AI features are powered by IBM watsonx.ai using Granite foundation models. When a user opens the dashboard, the server collects all relevant metrics, constructs a role-aware prompt, sends it to watsonx.ai, and parses the structured response back into the UI. Everything is designed to be fast — responses are cached for 6 hours per customer to minimize AI processing while keeping data reasonably fresh.
+All Is Well is built with Next.js, a modern web framework that handles both the frontend (what users see) and the backend (the AI integration). The AI features are powered by IBM watsonx.ai using Granite foundation models. When a user opens the dashboard, the server collects all relevant metrics, constructs a role-aware prompt, sends it to watsonx.ai, and parses the structured response back into the UI. Everything is designed to be fast — responses are cached for 6 hours per customer to minimize AI processing while keeping data reasonably fresh.
 
 The dashboard itself uses Tremor for charts and visualizations, Tailwind CSS for styling with full dark mode support, and deploys to Vercel for global edge delivery. The entire solution is a single codebase — no separate backend servers, no complex microservice architecture. This simplicity is intentional: it makes the portal easy to deploy, maintain, and extend.
 
 ## Nine New UX Enhancements That Make the Dashboard Feel Alive
 
-Beyond the core AI features, the portal has recently gained a set of experience improvements that make it feel less like a static report and more like a genuinely interactive command center. Here is what was added and why each one matters.
+Beyond the core AI features, All Is Well has recently gained a set of experience improvements that make it feel less like a static report and more like a genuinely interactive command center. Here is what was added and why each one matters.
 
 ### Real-Time Data Refresh
 
@@ -82,7 +84,7 @@ You can toggle auto-refresh on and set the interval — 30 seconds, 1 minute, or
 
 ### Dashboard Export and PDF
 
-A single click generates a branded PDF snapshot of the entire dashboard. There is also a print-friendly data report format for situations where someone needs to share results in a meeting or attach them to a ticket. The export captures the visual state of the dashboard at that moment — charts, values, and all — with a branded header identifying it as an All Is Well report.
+A single click generates a branded PDF snapshot of the entire dashboard. There is also a print-friendly data report format for situations where someone needs to share results in a meeting or attach them to a ticket. The export captures the visual state of the dashboard at that moment — charts, values, and all — with a branded header identifying it as an All Is Well — Your End-to-End Digital Health Dashboard report.
 
 ### Widget Search and Filter
 
@@ -110,16 +112,16 @@ Ten of the key widgets now support side-by-side period comparison. You can switc
 
 ### README Rebrand
 
-The project has been formally renamed. It is now called "All Is Well — Your End-to-End Digital Health Dashboard," reflecting its expanded scope beyond infrastructure transparency to a broader picture of organisational health. The name is intentionally optimistic — the goal of the portal is to give customers enough visibility that they can say, with confidence, that all is well.
+The project has been formally renamed. All Is Well — Your End-to-End Digital Health Dashboard reflects its expanded scope beyond infrastructure transparency to a broader picture of organisational health. The name is intentionally optimistic — the goal is to give customers enough visibility that they can say, with confidence, that all is well.
 
 ## Real-World Impact
 
-Consider a concrete scenario: It's Wednesday afternoon. The Transparency Portal's anomaly detection flags that the Auth Service error rate has tripled overnight. The predictive insights module calculates that if this trend continues alongside the declining SLA metrics, there's a medium risk of breaching the 99.9% SLA target within two weeks. The CTO sees this in their morning dashboard summary. They don't need to understand error rates or percentiles — the AI tells them in business terms: "Your SLA is at risk. Here's why, and here's the timeframe."
+Consider a concrete scenario: It's Wednesday afternoon. All Is Well's anomaly detection flags that the Auth Service error rate has tripled overnight. The predictive insights module calculates that if this trend continues alongside the declining SLA metrics, there's a medium risk of breaching the 99.9% SLA target within two weeks. The CTO sees this in their morning dashboard summary. They don't need to understand error rates or percentiles — the AI tells them in business terms: "Your SLA is at risk. Here's why, and here's the timeframe."
 
 The CTO messages the MSP. The MSP's technical team, looking at the same portal's technical view, can see the correlated metrics: the CPU spike is causing the latency increase, which is causing the Auth Service timeouts. They scale the compute resources. The error rate drops. The SLA stays healthy. The predicted breach never happens.
 
-Without the portal, this scenario plays out very differently. The error rate spike might go unnoticed until it causes a customer-facing outage. The SLA breach happens. The customer finds out in next month's report. Trust erodes. Contract renewal becomes uncertain.
+Without All Is Well, this scenario plays out very differently. The error rate spike might go unnoticed until it causes a customer-facing outage. The SLA breach happens. The customer finds out in next month's report. Trust erodes. Contract renewal becomes uncertain.
 
 ## Summary
 
-The Transparency Portal transforms the managed service customer experience from opaque monthly reports to real-time, AI-powered visibility. With 44 widgets across 3 role-based views, 4 AI features powered by IBM watsonx.ai, anomaly detection that correlates across metrics, and predictive insights that warn of problems before they happen, it represents a new standard for MSP-customer transparency. It serves executives, business stakeholders, and technical leads equally well — not by showing them the same data, but by using AI to translate infrastructure reality into each audience's language.
+All Is Well — Your End-to-End Digital Health Dashboard transforms the managed service customer experience from opaque monthly reports to real-time, AI-powered visibility. With 44 widgets across 3 role-based views, 4 AI features powered by IBM watsonx.ai, anomaly detection that correlates across metrics, and predictive insights that warn of problems before they happen, it represents a new standard for MSP-customer transparency. It serves executives, business stakeholders, and technical leads equally well — not by showing them the same data, but by using AI to translate infrastructure reality into each audience's language.

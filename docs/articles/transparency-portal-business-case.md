@@ -12,7 +12,7 @@ That is not a product problem. It is a visibility problem. And it is costing T-S
 
 ## The IBM-Powered Transparency Platform
 
-The Transparency Portal becomes a fundamentally different product when it stops showing illustrative data and starts showing operational truth. Four IBM services make this possible -- each replacing a category of mock widgets with live, AI-enriched intelligence that no competitor currently offers.
+All Is Well — Your End-to-End Digital Health Dashboard — becomes a fundamentally different product when it stops showing illustrative data and starts showing operational truth. Four IBM services make this possible -- each replacing a category of mock widgets with live, AI-enriched intelligence that no competitor currently offers.
 
 | IBM Service | What It Does | Portal Integration | Customer Value |
 |-------------|-------------|-------------------|----------------|
@@ -124,7 +124,7 @@ This section lays out every number, every assumption, and every calculation. No 
 
 ### What It Costs to Build: The Team Model
 
-The Transparency Portal requires a blended delivery team across three locations, leveraging T-Systems' existing delivery centers. Here is the team composition for Year 1 (build + pilot) and Year 2+ (operate + scale).
+All Is Well requires a blended delivery team across three locations, leveraging T-Systems' existing delivery centers. Here is the team composition for Year 1 (build + pilot) and Year 2+ (operate + scale).
 
 **Year 1: Build and Pilot (12 months)**
 
@@ -214,7 +214,7 @@ T-Systems' actual churn rate is not public. But even at a best-in-class 10%, tha
 
 **The retention case:**
 
-A Transparency Portal does not prevent churn caused by pricing, M&A, or insolvency. It prevents churn caused by *perceived* lack of value -- the customer who cannot see the 99.999% uptime they are paying for, the CISO who cannot show their board that patch compliance is at 94%, the CTO who has to ask for a report instead of opening a dashboard.
+A transparency portal does not prevent churn caused by pricing, M&A, or insolvency. It prevents churn caused by *perceived* lack of value -- the customer who cannot see the 99.999% uptime they are paying for, the CISO who cannot show their board that patch compliance is at 94%, the CTO who has to ask for a report instead of opening a dashboard.
 
 | Scenario | Customers Retained | Revenue Preserved | How |
 |----------|--------------------|-------------------|-----|
@@ -262,7 +262,7 @@ One customer. EUR 11-15 million in total economic impact. The portal costs EUR 7
 
 ### What It Generates: New Revenue Through Upselling and Expansion
 
-The Transparency Portal does not just prevent loss. It creates a mechanism for growth. When customers can see exactly what services they consume, how those services perform, and where gaps exist, they buy more.
+All Is Well does not just prevent loss. It creates a mechanism for growth. When customers can see exactly what services they consume, how those services perform, and where gaps exist, they buy more.
 
 **The upsell mechanics:**
 
@@ -400,7 +400,7 @@ Even if you halve every return estimate and double every cost estimate, the thre
 
 ## How the Portal Empowers Every Level of the Customer Organization
 
-A dashboard is only valuable if the right people use it. The Transparency Portal is designed for three distinct audiences within every customer organization -- and each audience has a different reason to trust T-Systems more after using it.
+A dashboard is only valuable if the right people use it. All Is Well is designed for three distinct audiences within every customer organization -- and each audience has a different reason to trust T-Systems more after using it.
 
 ### C-Level: From "Trust Me" to "See for Yourself"
 
@@ -440,7 +440,7 @@ CTOs, infrastructure architects, and security engineers need granular data. Late
 | Patch compliance rates by category with progress bars | Shows percentage of estate patched, by OS/middleware/application | Audit-ready evidence for ISO 27001, SOC 2, and industry-specific compliance |
 | Backup success rates per service | Proves disaster recovery readiness with concrete percentages | Shifts backup conversations from "do we have backups?" to "backups are at 98.5%" |
 
-**The switching barrier lives here.** When a customer's technical team has integrated the Transparency Portal into their daily workflow -- when the CTO opens it every morning, when the security engineer references it in audit reports, when the infrastructure lead uses it to plan capacity -- switching providers means losing that visibility layer. The portal becomes operational infrastructure, not a nice-to-have. Every day of usage increases switching cost.
+**The switching barrier lives here.** When a customer's technical team has integrated All Is Well into their daily workflow -- when the CTO opens it every morning, when the security engineer references it in audit reports, when the infrastructure lead uses it to plan capacity -- switching providers means losing that visibility layer. The portal becomes operational infrastructure, not a nice-to-have. Every day of usage increases switching cost.
 
 > *The C-Level sees confidence. The business sees trends. The technical team sees proof. All three see a reason to stay.*
 
@@ -465,9 +465,9 @@ This program has evolved beyond T-Systems into the Zero Outage Industry Standard
 
 The problem: all of this lives in internal dashboards, PDF reports compiled manually, and quarterly business reviews where a service delivery manager walks through slides. The customer's CIO does not see it. Their CISO does not see it. Their board does not see it.
 
-A Transparency Portal changes the equation:
+A transparency portal changes the equation:
 
-| Current State | With Transparency Portal |
+| Current State | With All Is Well |
 |---------------|--------------------------|
 | SLA data compiled manually for QBRs (8-10 hours/week per account) | Real-time SLA trends visible 24/7, zero manual effort |
 | Incident notification: hours to days | Incident status page updates in real time |
@@ -478,7 +478,7 @@ A Transparency Portal changes the equation:
 
 **Manual reporting savings alone justify part of the investment.** If T-Systems' service delivery managers spend 8-10 hours per week compiling reports per major account, and the portal automates 70% of that effort, the time savings across 100 major accounts is 560-700 hours per week -- roughly 15-18 FTEs worth of effort redirected from report compilation to value-added customer engagement.
 
-> *Zero Outage proves you can run IT at 99.999%. The Transparency Portal proves it to the customer who signs the renewal.*
+> *Zero Outage proves you can run IT at 99.999%. All Is Well proves it to the customer who signs the renewal.*
 
 ---
 
@@ -504,7 +504,7 @@ The word "transparency" -- as a brand position for a customer portal -- is uncla
 
 Gartner predicts that by 2028, organizations using network digital twins will reduce unplanned outages by 70%. The global digital twin market is projected to grow from USD 36 billion in 2025 to USD 329 billion by 2033.
 
-The Transparency Portal is, in effect, a customer-facing digital twin of their managed IT environment. Not a static dashboard -- a living representation of:
+All Is Well is, in effect, a customer-facing digital twin of their managed IT environment. Not a static dashboard -- a living representation of:
 
 - **Service health** across cloud, SAP, security, connectivity, and workplace categories
 - **SLA compliance** with historical trends and target tracking
@@ -519,7 +519,7 @@ This positions T-Systems at the intersection of two powerful trends: the trust e
 
 ## What the Live Demo Proves
 
-A working prototype of the Transparency Portal -- branded **"All Is Well — Your End-to-End Digital Health Dashboard"** -- is live at [transparency-chi.vercel.app](https://transparency-chi.vercel.app). It demonstrates:
+A working prototype of All Is Well — **Your End-to-End Digital Health Dashboard** — is live at [transparency-chi.vercel.app](https://transparency-chi.vercel.app). It demonstrates:
 
 | Page | What It Shows |
 |------|---------------|
@@ -556,7 +556,7 @@ These nine capabilities are not cosmetic additions. Each one closes a specific g
 
 | Action | Timeline | Investment | Expected Impact |
 |--------|----------|------------|-----------------|
-| Pilot the Transparency Portal with 5-10 flagship customers | Q2 2026 | EUR 1.1M (Year 1 build incl. IBM) | Validate retention and satisfaction impact with measurable NPS delta |
+| Pilot All Is Well with 5-10 flagship customers | Q2 2026 | EUR 1.1M (Year 1 build incl. IBM) | Validate retention and satisfaction impact with measurable NPS delta |
 | Connect IBM Instana for live infrastructure metrics | Q3 2026 | Included in Year 1 | Replace mock data with real-time APM -- the first "live truth" moment for pilot customers |
 | Connect IBM Concert for security and compliance data | Q3 2026 | Included in Year 1 | Power vulnerability, patch, and certificate widgets with AI-correlated insights |
 | Enable IBM Turbonomic for optimization recommendations | Q4 2026 | Included in Year 1 | Surface actionable cost savings that convert dashboard viewers into buyers |
