@@ -3,9 +3,16 @@
 import { Suspense } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { WidgetConfig } from "@/types";
+import { WidgetConfig, WidgetSize } from "@/types";
 import { getWidgetComponent } from "@/config/widget-registry";
 import WidgetShell from "./WidgetShell";
+
+const sizeClasses: Record<WidgetSize, string> = {
+  small: "widget-small",
+  medium: "widget-medium",
+  large: "widget-large",
+  full: "widget-full",
+};
 
 interface SortableWidgetProps {
   config: WidgetConfig;
@@ -38,7 +45,7 @@ export default function SortableWidget({ config }: SortableWidgetProps) {
   const Component = getWidgetComponent(config.id);
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes}>
+    <div ref={setNodeRef} style={style} className={sizeClasses[config.size]} {...attributes}>
       <Suspense fallback={<WidgetFallback title={config.title} size={config.size} />}>
         <WidgetShell
           title={config.title}
