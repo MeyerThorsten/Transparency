@@ -3,6 +3,7 @@ import {
   RiBarChartBoxLine,
   RiShieldCheckLine,
   RiSettings3Line,
+  RiFileList3Line,
 } from "@remixicon/react";
 
 export interface NavItem {
@@ -15,5 +16,6 @@ export const navigationItems: NavItem[] = [
   { label: "Dashboard", href: "/dashboard", icon: RiDashboardLine },
   { label: "Reports", href: "/reports", icon: RiBarChartBoxLine },
   { label: "Compliance", href: "/compliance", icon: RiShieldCheckLine },
+  { label: "Documentation", href: "/documentation", icon: RiFileList3Line },
   { label: "Settings", href: "/settings", icon: RiSettings3Line },
 ];
