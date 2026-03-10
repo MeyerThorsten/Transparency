@@ -1,0 +1,105 @@
+[
+  {
+    "id": "notif-001",
+    "type": "critical",
+    "category": "operational",
+    "title": "SLA Breach Alert",
+    "message": "Service level agreement for API Gateway has been breached. Response time exceeded 2000ms threshold for the last 15 minutes.",
+    "timestamp": "2026-03-10T08:15:00Z",
+    "widgetId": "widget-sla"
+  },
+  {
+    "id": "notif-002",
+    "type": "critical",
+    "category": "operational",
+    "title": "Security Vulnerability Detected",
+    "message": "A critical CVE-2026-1337 vulnerability has been detected in the authentication service. Immediate patching is required.",
+    "timestamp": "2026-03-10T07:30:00Z",
+    "widgetId": "widget-security"
+  },
+  {
+    "id": "notif-003",
+    "type": "warning",
+    "category": "operational",
+    "title": "Cost Spike Detected",
+    "message": "Cloud spend has increased by 34% in the last 24 hours compared to the 7-day average. Current projected monthly cost: $48,200.",
+    "timestamp": "2026-03-10T09:00:00Z",
+    "widgetId": "widget-cost"
+  },
+  {
+    "id": "notif-004",
+    "type": "warning",
+    "category": "operational",
+    "title": "Anomaly in API Latency",
+    "message": "Unusual latency pattern detected on the /api/v2/reports endpoint. P99 latency is 3.2x above baseline over the last 30 minutes.",
+    "timestamp": "2026-03-10T06:45:00Z",
+    "widgetId": "widget-api"
+  },
+  {
+    "id": "notif-005",
+    "type": "warning",
+    "category": "operational",
+    "title": "Backup Job Delayed",
+    "message": "Scheduled nightly backup for production database has been delayed by 2 hours. Backup window may overlap with morning peak traffic.",
+    "timestamp": "2026-03-10T04:20:00Z",
+    "widgetId": "widget-backup"
+  },
+  {
+    "id": "notif-006",
+    "type": "info",
+    "category": "operational",
+    "title": "Change CHG-2026-042 Approved",
+    "message": "Change request CHG-2026-042 for the load balancer configuration update has been approved by the Change Advisory Board. Scheduled for 2026-03-11 02:00 UTC.",
+    "timestamp": "2026-03-10T10:05:00Z"
+  },
+  {
+    "id": "notif-007",
+    "type": "info",
+    "category": "operational",
+    "title": "Backup Complete",
+    "message": "Full backup of the analytics data warehouse completed successfully. 2.4 TB archived to cold storage. Retention: 90 days.",
+    "timestamp": "2026-03-10T03:15:00Z",
+    "widgetId": "widget-backup"
+  },
+  {
+    "id": "notif-008",
+    "type": "info",
+    "category": "operational",
+    "title": "New AI Insight Available",
+    "message": "The AI engine has identified a new optimization opportunity: consolidating 3 underutilized compute clusters could reduce infrastructure costs by ~12%.",
+    "timestamp": "2026-03-10T11:30:00Z",
+    "widgetId": "widget-ai-insights"
+  },
+  {
+    "id": "notif-009",
+    "type": "info",
+    "category": "operational",
+    "title": "SSL Certificate Renewed",
+    "message": "SSL certificate for transparency-portal.alliswell.com has been automatically renewed. New expiry: 2027-03-10.",
+    "timestamp": "2026-03-10T00:01:00Z"
+  },
+  {
+    "id": "notif-010",
+    "type": "system",
+    "category": "system",
+    "title": "Dashboard Layout Saved",
+    "message": "Your custom dashboard layout has been saved successfully and will be restored on your next login.",
+    "timestamp": "2026-03-10T12:00:00Z"
+  },
+  {
+    "id": "notif-011",
+    "type": "system",
+    "category": "system",
+    "title": "Export Complete",
+    "message": "Your requested PDF export of the Q1 2026 Executive Summary report is ready. The file will be available for download for 48 hours.",
+    "timestamp": "2026-03-10T11:50:00Z"
+  },
+  {
+    "id": "notif-012",
+    "type": "system",
+    "category": "collaboration",
+    "title": "@gaurav mentioned you in a comment",
+    "message": "@gaurav: \"@you — can you review the updated SLA thresholds in the Operations widget? I've adjusted the P99 targets based on last quarter's data.\"",
+    "timestamp": "2026-03-10T10:45:00Z"
+  }
+]

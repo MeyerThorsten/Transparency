@@ -6,6 +6,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { WidgetConfig, WidgetSize } from "@/types";
 import { getWidgetComponent } from "@/config/widget-registry";
 import WidgetShell from "./WidgetShell";
+import { useRefresh } from "@/lib/refresh-context";
 
 const sizeClasses: Record<WidgetSize, string> = {
   small: "widget-small",
@@ -16,6 +17,10 @@ const sizeClasses: Record<WidgetSize, string> = {
 
 interface SortableWidgetProps {
   config: WidgetConfig;
+  index?: number;
+  isFavorite?: boolean;
+  onToggleFavorite?: () => void;
+  dimmed?: boolean;
 }
 
 function WidgetFallback({ title, size }: { title: string; size: string }) {
@@ -26,7 +31,7 @@ function WidgetFallback({ title, size }: { title: string; size: string }) {
   );
 }
 
-export default function SortableWidget({ config }: SortableWidgetProps) {
+export default function SortableWidget({ config, index, isFavorite, onToggleFavorite, dimmed }: SortableWidgetProps) {
   const {
     attributes,
     listeners,
@@ -35,6 +40,8 @@ export default function SortableWidget({ config }: SortableWidgetProps) {
     transition,
     isDragging,
   } = useSortable({ id: config.id });
+
+  const { refreshKey } = useRefresh();
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -45,15 +52,19 @@ export default function SortableWidget({ config }: SortableWidgetProps) {
   const Component = getWidgetComponent(config.id);
 
   return (
-    <div ref={setNodeRef} style={style} className={sizeClasses[config.size]} {...attributes}>
+    <div ref={setNodeRef} style={style} className={`${sizeClasses[config.size]}${isFavorite ? " ring-1 ring-amber-400/20" : ""}${dimmed ? " opacity-20 pointer-events-none scale-[0.98] transition-all duration-300" : ""}`} {...attributes}>
       <Suspense fallback={<WidgetFallback title={config.title} size={config.size} />}>
         <WidgetShell
           title={config.title}
           size={config.size}
           widgetId={config.id}
           dragListeners={listeners}
+          animationDelay={index !== undefined ? index * 50 : 0}
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+          supportsComparison={config.supportsComparison}
         >
-          <Component />
+          <Component key={`${config.id}-${refreshKey}`} />
         </WidgetShell>
       </Suspense>
     </div>
