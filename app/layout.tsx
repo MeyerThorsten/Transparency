@@ -3,9 +3,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-context";
 
 export const metadata: Metadata = {
-  title: "ClarityOps Dashboard",
+  title: "All Is Well Dashboard",
   description:
-    "ClarityOps — Single Source of Truth. Transparency for Managed Services with real-time monitoring, AI-powered insights, and role-based dashboards for 99.999% availability.",
+    "All Is Well — Your End-to-End Digital Health Dashboard with real-time monitoring, AI-powered insights, and role-based dashboards for 99.999% availability.",
 };
 
 export default function RootLayout({
