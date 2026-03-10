@@ -6,6 +6,7 @@ import { CustomerProvider } from "@/lib/customer-context";
 import { SidebarProvider, useSidebar } from "@/lib/sidebar-context";
 import { RefreshProvider } from "@/lib/refresh-context";
 import { NotificationProvider } from "@/lib/notification-context";
+import { ComparisonProvider } from "@/lib/comparison-context";
 
 function ContentArea({ children }: { children: React.ReactNode }) {
   const { collapsed } = useSidebar();
@@ -22,15 +23,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <RefreshProvider>
       <NotificationProvider>
-        <CustomerProvider>
-          <SidebarProvider>
-            <div className="min-h-screen bg-gray-50 dark:bg-[#111118]">
-              <Sidebar />
-              <ContentArea>{children}</ContentArea>
-              <NotificationPanel />
-            </div>
-          </SidebarProvider>
-        </CustomerProvider>
+        <ComparisonProvider>
+          <CustomerProvider>
+            <SidebarProvider>
+              <div className="min-h-screen bg-gray-50 dark:bg-[#111118]">
+                <Sidebar />
+                <ContentArea>{children}</ContentArea>
+                <NotificationPanel />
+              </div>
+            </SidebarProvider>
+          </CustomerProvider>
+        </ComparisonProvider>
       </NotificationProvider>
     </RefreshProvider>
   );

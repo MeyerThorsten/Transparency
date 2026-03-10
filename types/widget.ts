@@ -6,6 +6,7 @@ export interface WidgetConfig {
   size: WidgetSize;
   category: string;
   requiredCategories?: string[];
+  supportsComparison?: boolean;
 }
 
 export type ViewType = "c-level" | "business" | "technical";

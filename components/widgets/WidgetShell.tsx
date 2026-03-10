@@ -6,6 +6,9 @@ import AnomalyBadge from "@/components/ai/AnomalyBadge";
 import DataFreshness from "@/components/widgets/shared/DataFreshness";
 import WidgetExpandModal from "@/components/widgets/WidgetExpandModal";
 import { useRefresh } from "@/lib/refresh-context";
+import { useComparison } from "@/lib/comparison-context";
+import DeltaIndicator from "./shared/DeltaIndicator";
+import { generatePreviousPeriod } from "@/lib/utils/comparison-data";
 
 interface WidgetShellProps {
   title: string;
@@ -19,6 +22,7 @@ interface WidgetShellProps {
   onRefresh?: () => void;
   isFavorite?: boolean;
   onToggleFavorite?: () => void;
+  supportsComparison?: boolean;
 }
 
 const sizeClasses: Record<WidgetSize, string> = {
@@ -28,10 +32,11 @@ const sizeClasses: Record<WidgetSize, string> = {
   full: "widget-full",
 };
 
-export default function WidgetShell({ title, size, children, loading, error, widgetId, dragListeners, animationDelay, onRefresh, isFavorite, onToggleFavorite }: WidgetShellProps) {
+export default function WidgetShell({ title, size, children, loading, error, widgetId, dragListeners, animationDelay, onRefresh, isFavorite, onToggleFavorite, supportsComparison }: WidgetShellProps) {
   const [expanded, setExpanded] = useState(false);
   const [lastRefreshed, setLastRefreshed] = useState<Date | undefined>(undefined);
   const { triggerRefresh, isRefreshing } = useRefresh();
+  const { enabled: comparisonEnabled } = useComparison();
 
   function handleRefresh() {
     triggerRefresh();
@@ -57,6 +62,15 @@ export default function WidgetShell({ title, size, children, loading, error, wid
             )}
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">{title}</h3>
             {widgetId && <AnomalyBadge widgetId={widgetId} />}
+            {comparisonEnabled && supportsComparison && widgetId && (
+              <DeltaIndicator
+                current={100}
+                previous={generatePreviousPeriod(100, widgetId, true)}
+              />
+            )}
+            {comparisonEnabled && !supportsComparison && (
+              <span className="text-[10px] text-gray-400 dark:text-gray-500 font-medium">Comparison N/A</span>
+            )}
             <div className="ml-auto flex items-center gap-2">
               <button
                 onClick={onToggleFavorite}

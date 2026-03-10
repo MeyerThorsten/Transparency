@@ -5,6 +5,7 @@ import ViewTabs from "./ViewTabs";
 import ThemeToggle from "./ThemeToggle";
 import AutoRefreshToggle from "./AutoRefreshToggle";
 import ExportMenu from "./ExportMenu";
+import ComparisonToggle from "./ComparisonToggle";
 import { RiNotification3Line, RiUser3Line, RiMenuLine } from "@remixicon/react";
 import { useCustomer } from "@/lib/customer-context";
 import { useSidebar } from "@/lib/sidebar-context";
@@ -57,6 +58,7 @@ export default function Header({
             customerName={customer?.name || "Dashboard"}
           />
         )}
+        <ComparisonToggle />
         {customer && (
           <span className="text-sm text-gray-500 dark:text-gray-400 hidden md:block">
             {customer.name}

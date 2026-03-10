@@ -62,6 +62,7 @@ export default function SortableWidget({ config, index, isFavorite, onToggleFavo
           animationDelay={index !== undefined ? index * 50 : 0}
           isFavorite={isFavorite}
           onToggleFavorite={onToggleFavorite}
+          supportsComparison={config.supportsComparison}
         >
           <Component key={`${config.id}-${refreshKey}`} />
         </WidgetShell>
