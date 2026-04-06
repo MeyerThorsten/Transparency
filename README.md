@@ -32,9 +32,9 @@ Open [http://localhost:3000](http://localhost:3000) — redirects to the C-Level
 
 | Element | Value |
 |---------|-------|
-| Primary | `#E20074` (Telekom Magenta) |
-| Hover | `#C00063` |
-| Light tint | `#FFF0F8` |
+| Primary | `#4F46E5` (Indigo) |
+| Hover | `#4338CA` |
+| Light tint | `#EEF2FF` |
 | Success | `#00C26D` |
 | Danger | `#F2321E` |
 | Warning | `#FC7E21` |

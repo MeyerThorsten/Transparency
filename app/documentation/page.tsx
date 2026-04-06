@@ -23,21 +23,9 @@ const videos = [
     description:
       "The All Is Well digital health dashboard utilizes IBM watsonx.ai and Granite foundation models to transform complex infrastructure metrics into actionable intelligence. This technical architecture relies on a Next.js and TypeScript stack to deliver core AI capabilities.",
   },
-  {
-    title: "The Business Case for Operational Transparency",
-    embedUrl: "https://www.youtube.com/embed/2FbqpUaY-rE",
-    description:
-      "All Is Well — Your End-to-End Digital Health Dashboard — becomes a fundamentally different product when it stops showing illustrative data and starts showing operational truth. Four IBM services make this possible.",
-  },
 ];
 
 const documents = [
-  {
-    title: "Business Case",
-    filename: "transparency-portal-business-case.pdf",
-    description:
-      "Strategic business case for the All Is Well platform, covering ROI, market analysis, and value proposition.",
-  },
   {
     title: "Project Description",
     filename: "transparency-portal-project-description.pdf",

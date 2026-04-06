@@ -22,7 +22,7 @@ export default function ZeroOutageBanner() {
   const meetsTarget = sla !== null && sla >= target;
 
   return (
-    <div className="rounded-xl bg-gradient-to-r from-[#E20074] to-[#9E0052] text-white p-5 mb-6 shadow-sm">
+    <div className="rounded-xl bg-gradient-to-r from-[#4F46E5] to-[#3730A3] text-white p-5 mb-6 shadow-sm">
       <div className="flex items-center justify-between">
         {/* Left: Program title + shield */}
         <div className="flex items-center gap-4">

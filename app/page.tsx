@@ -138,7 +138,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white dark:bg-[#111118]">
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#E20074] to-[#5A0030] text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#4F46E5] to-[#312E81] text-white">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.1),transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:py-40">
           <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -159,7 +159,7 @@ export default function Home() {
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/dashboard?view=c-level"
-                  className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#E20074] shadow-lg transition hover:bg-white/90"
+                  className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#4F46E5] shadow-lg transition hover:bg-white/90"
                 >
                   Explore Dashboard
                   <RiArrowRightLine className="h-4 w-4" />
@@ -266,7 +266,7 @@ export default function Home() {
                 key={f.title}
                 className="rounded-xl border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] p-6 shadow-sm transition hover:shadow-md"
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#2D1025] text-magenta">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#1e1b4b] text-magenta">
                   <f.icon className="h-5 w-5" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -298,7 +298,7 @@ export default function Home() {
                 key={v.title}
                 className="flex flex-col rounded-xl border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] p-6 shadow-sm transition hover:shadow-md"
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#2D1025] text-magenta">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#1e1b4b] text-magenta">
                   <v.icon className="h-5 w-5" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -349,7 +349,7 @@ export default function Home() {
                 key={p.title}
                 className="flex flex-col rounded-xl border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] p-6 shadow-sm transition hover:shadow-md"
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#2D1025] text-magenta">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#1e1b4b] text-magenta">
                   <p.icon className="h-5 w-5" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -383,7 +383,7 @@ export default function Home() {
       </section>
 
       {/* ── Stats Bar ────────────────────────────────────────── */}
-      <section className="bg-gradient-to-r from-[#E20074] to-[#5A0030] py-14">
+      <section className="bg-gradient-to-r from-[#4F46E5] to-[#312E81] py-14">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 gap-8 text-center sm:grid-cols-4">
             {stats.map((s) => (
@@ -424,7 +424,7 @@ export default function Home() {
       <footer className="border-t border-gray-200 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#111118] py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 text-center text-sm text-gray-400 dark:text-gray-500">
           <Image src="/logo.png" alt="All Is Well" width={280} height={62} className="h-14 w-auto" />
-          <p>&copy; {new Date().getFullYear()} Thorsten Meyer &amp; Gaurav Agrawal</p>
+          <p>&copy; {new Date().getFullYear()} Thorsten Meyer</p>
         </div>
       </footer>
     </main>

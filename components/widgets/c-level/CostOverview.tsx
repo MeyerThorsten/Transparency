@@ -53,7 +53,7 @@ export default function CostOverview() {
         data={chartData}
         index="category"
         categories={["Current Month", "Budget"]}
-        colors={["fuchsia", "cyan"]}
+        colors={["indigo", "cyan"]}
         valueFormatter={(v: number) => `${(v / 1000).toFixed(0)}k €`}
         yAxisWidth={56}
         showAnimation

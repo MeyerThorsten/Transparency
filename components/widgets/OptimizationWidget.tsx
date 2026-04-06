@@ -122,7 +122,7 @@ export default function OptimizationWidget() {
                 : "border-gray-100 dark:border-[#2E2E3D]"
             }`}
           >
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#2D1025] text-magenta">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#1e1b4b] text-magenta">
               <i className={`${rec.icon} text-base`} />
             </div>
             <div className="flex-1 min-w-0">

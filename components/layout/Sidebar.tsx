@@ -67,7 +67,7 @@ export default function Sidebar() {
                       collapsed ? "justify-center" : ""
                     } ${
                       isActive
-                        ? "bg-magenta-50 dark:bg-[#2D1025] text-magenta"
+                        ? "bg-magenta-50 dark:bg-[#1e1b4b] text-magenta"
                         : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-[#262633] hover:text-gray-900 dark:hover:text-gray-200"
                     }`}
                   >

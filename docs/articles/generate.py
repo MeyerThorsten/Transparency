@@ -38,7 +38,7 @@ PDF_FILE = SCRIPT_DIR / "transparency-portal-business-case.pdf"
 DOCX_FILE = SCRIPT_DIR / "transparency-portal-business-case.docx"
 
 # Brand colors
-MAGENTA = "#E20074"
+MAGENTA = "#4F46E5"
 DARK_BG = "#1C1C27"
 COPPER = "#B87333"
 SAND = "#F5F0E8"

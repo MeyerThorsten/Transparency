@@ -21,7 +21,7 @@ export async function exportVisualSnapshot(gridElement: HTMLElement, meta: Expor
 
   // Branded header
   pdf.setFontSize(20);
-  pdf.setTextColor(226, 0, 116); // magenta
+  pdf.setTextColor(79, 70, 229); // indigo
   pdf.text("All Is Well", 15, 15);
   pdf.setFontSize(10);
   pdf.setTextColor(100, 100, 100);

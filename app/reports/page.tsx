@@ -204,7 +204,7 @@ function CostSummary() {
           data={chartData}
           index="category"
           categories={["Current Month", "Budget"]}
-          colors={["fuchsia", "cyan"]}
+          colors={["indigo", "cyan"]}
           valueFormatter={(v: number) => fmt(v)}
           yAxisWidth={72}
           showAnimation
@@ -291,7 +291,7 @@ function TicketTrends() {
           data={chartData}
           index="month"
           categories={["Opened", "Resolved"]}
-          colors={["fuchsia", "emerald"]}
+          colors={["indigo", "emerald"]}
           valueFormatter={(v: number) => `${v}`}
           yAxisWidth={40}
           showAnimation

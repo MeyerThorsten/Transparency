@@ -29,7 +29,7 @@ export default function NetworkThroughput() {
         data={chartData}
         index="timestamp"
         categories={["Inbound", "Outbound"]}
-        colors={["cyan", "fuchsia"]}
+        colors={["cyan", "indigo"]}
         yAxisWidth={80}
         showAnimation
         curveType="monotone"

@@ -47,7 +47,7 @@ export default function CustomerSelector() {
                 setOpen(false);
               }}
               className={`flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-50 dark:hover:bg-[#262633] transition-colors first:rounded-t-lg last:rounded-b-lg ${
-                c.id === customer.id ? "bg-magenta-50 dark:bg-[#2D1025]" : ""
+                c.id === customer.id ? "bg-magenta-50 dark:bg-[#1e1b4b]" : ""
               }`}
             >
               <span className="flex items-center justify-center w-7 h-7 rounded-md bg-gray-100 dark:bg-[#262633] text-gray-600 dark:text-gray-400 text-xs font-bold">

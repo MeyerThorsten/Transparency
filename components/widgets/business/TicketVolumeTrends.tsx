@@ -29,7 +29,7 @@ export default function TicketVolumeTrends() {
         data={chartData}
         index="month"
         categories={["Opened", "Resolved"]}
-        colors={["fuchsia", "emerald"]}
+        colors={["indigo", "emerald"]}
         valueFormatter={(v) => `${v}`}
         yAxisWidth={40}
         className="h-64"

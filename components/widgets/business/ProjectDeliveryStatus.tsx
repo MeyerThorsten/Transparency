@@ -43,7 +43,7 @@ export default function ProjectDeliveryStatus() {
               <td className="py-2 pr-4 font-medium text-gray-900 dark:text-gray-100">{project.name}</td>
               <td className="py-2 pr-4">
                 <div className="flex items-center gap-2">
-                  <ProgressBar value={project.progress} color="fuchsia" className="w-24" />
+                  <ProgressBar value={project.progress} color="indigo" className="w-24" />
                   <span className="text-xs text-gray-500 dark:text-gray-400">{project.progress}%</span>
                 </div>
               </td>

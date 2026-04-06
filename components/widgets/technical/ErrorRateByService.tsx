@@ -29,7 +29,7 @@ export default function ErrorRateByService() {
     return row;
   });
 
-  const colors = ["rose", "amber", "blue", "violet", "cyan", "emerald", "fuchsia"];
+  const colors = ["rose", "amber", "blue", "violet", "cyan", "emerald", "indigo"];
 
   return (
     <div>

@@ -51,9 +51,9 @@
 ");
 
 :root {
-  --magenta: #E20074;
-  --magenta-hover: #C00063;
-  --magenta-light: #FFF0F8;
+  --magenta: #4F46E5;
+  --magenta-hover: #4338CA;
+  --magenta-light: #EEF2FF;
   --success: #00C26D;
   --danger: #F2321E;
   --warning: #FC7E21;
@@ -64,19 +64,19 @@
 
 @theme inline {
   /* Brand colors */
-  --color-magenta: #E20074;
-  --color-magenta-hover: #C00063;
-  --color-magenta-light: #FFF0F8;
-  --color-magenta-50: #FFF0F8;
-  --color-magenta-100: #FFE0F0;
-  --color-magenta-200: #FFC1E1;
-  --color-magenta-300: #FF8DC6;
-  --color-magenta-400: #FF4FA6;
-  --color-magenta-500: #E20074;
-  --color-magenta-600: #C00063;
-  --color-magenta-700: #9E0052;
-  --color-magenta-800: #7C0041;
-  --color-magenta-900: #5A0030;
+  --color-magenta: #4F46E5;
+  --color-magenta-hover: #4338CA;
+  --color-magenta-light: #EEF2FF;
+  --color-magenta-50: #EEF2FF;
+  --color-magenta-100: #E0E7FF;
+  --color-magenta-200: #C7D2FE;
+  --color-magenta-300: #A5B4FC;
+  --color-magenta-400: #818CF8;
+  --color-magenta-500: #6366F1;
+  --color-magenta-600: #4F46E5;
+  --color-magenta-700: #4338CA;
+  --color-magenta-800: #3730A3;
+  --color-magenta-900: #312E81;
   --color-success: #00C26D;
   --color-danger: #F2321E;
   --color-warning: #FC7E21;

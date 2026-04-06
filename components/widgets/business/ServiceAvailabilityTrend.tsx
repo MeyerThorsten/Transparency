@@ -29,7 +29,7 @@ export default function ServiceAvailabilityTrend() {
         data={chartData}
         index="month"
         categories={["Availability", "Target"]}
-        colors={["fuchsia", "gray"]}
+        colors={["indigo", "gray"]}
         valueFormatter={(v: number) => `${v.toFixed(3)}%`}
         yAxisWidth={80}
         className="h-64"

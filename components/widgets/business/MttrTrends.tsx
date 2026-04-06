@@ -31,7 +31,7 @@ export default function MttrTrends() {
         data={chartData}
         index="month"
         categories={["P1", "P2", "P3", "P4"]}
-        colors={["rose", "fuchsia", "amber", "gray"]}
+        colors={["rose", "indigo", "amber", "gray"]}
         valueFormatter={(v) => `${v} min`}
         yAxisWidth={64}
         className="h-64"
