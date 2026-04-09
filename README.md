@@ -1,6 +1,6 @@
-# All Is Well — Your End-to-End Digital Health Dashboard
+# Glasspane — Your End-to-End Digital Health Dashboard
 
-A demo-ready dashboard showcasing how managed service customers can monitor their subscribed IT services. Built around the **Zero Outage** strategy (99.999% availability target) and the 3P pillars: People, Processes, Platforms. **All Is Well** provides AI-powered insights alongside real-time operational metrics in a unified transparency portal.
+A demo-ready dashboard showcasing how managed service customers can monitor their subscribed IT services. Built around the **Zero Outage** strategy (99.999% availability target) and the 3P pillars: People, Processes, Platforms. **Glasspane** provides AI-powered insights alongside real-time operational metrics in a unified transparency portal.
 
 *Your End-to-End Digital Health Dashboard*
 
@@ -16,6 +16,102 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) — redirects to the C-Level dashboard view.
 
 > **Note:** `--legacy-peer-deps` is required because Tremor v3 declares a peer dependency on React 18, while this project uses React 19 / Next.js 16. Tremor works fine at runtime.
+
+## AI Providers
+
+The AI routes under `app/api/ai/*` are provider-agnostic. The current runtime supports:
+
+- `mock`
+- `watsonx`
+- `openrouter`
+- `lm-studio`
+- `ollama`
+- `openai`
+- `anthropic`
+- `gemini`
+- `bedrock`
+
+Current model-backed tasks:
+
+- `summary`
+- `chat`
+- `insights`
+- `risk-briefing`
+- `sla-risk`
+- `cost-forecast`
+- `capacity-planner`
+- `root-cause-patterns`
+- `change-impact`
+
+You can route each task independently:
+
+```bash
+AI_PROVIDER=mock
+AI_FALLBACKS=mock
+
+AI_SUMMARY_PROVIDER=openrouter
+AI_SUMMARY_MODEL=openai/gpt-4o-mini
+
+AI_CHAT_PROVIDER=anthropic
+AI_CHAT_MODEL=claude-3-5-sonnet-latest
+AI_CHAT_FALLBACKS=openai,mock
+
+AI_INSIGHTS_PROVIDER=lm-studio
+AI_INSIGHTS_MODEL=qwen2.5-7b-instruct
+AI_INSIGHTS_FALLBACKS=ollama,mock
+
+AI_RISK_BRIEFING_PROVIDER=openai
+AI_RISK_BRIEFING_MODEL=gpt-4o-mini
+AI_RISK_BRIEFING_FALLBACKS=anthropic,mock
+
+AI_SLA_RISK_PROVIDER=openrouter
+AI_SLA_RISK_MODEL=openai/gpt-4o-mini
+AI_SLA_RISK_FALLBACKS=mock
+
+AI_COST_FORECAST_PROVIDER=openrouter
+AI_COST_FORECAST_MODEL=openai/gpt-4o-mini
+
+AI_CAPACITY_PLANNER_PROVIDER=anthropic
+AI_CAPACITY_PLANNER_MODEL=claude-3-5-sonnet-latest
+
+AI_ROOT_CAUSE_PATTERNS_PROVIDER=openai
+AI_ROOT_CAUSE_PATTERNS_MODEL=gpt-4o-mini
+
+AI_CHANGE_IMPACT_PROVIDER=lm-studio
+AI_CHANGE_IMPACT_MODEL=qwen2.5-7b-instruct
+
+AI_SUMMARY_PROVIDER=gemini
+AI_SUMMARY_MODEL=gemini-2.5-flash
+
+AI_CHAT_PROVIDER=bedrock
+AI_CHAT_MODEL=openai.gpt-oss-20b-1:0
+AI_CHAT_FALLBACKS=openai,mock
+```
+
+Provider-specific env vars:
+
+- `WATSONX_API_KEY`, `WATSONX_PROJECT_ID`, `WATSONX_REGION`, `WATSONX_MODEL_ID`
+- `OPENROUTER_API_KEY`, `OPENROUTER_BASE_URL`, `OPENROUTER_MODEL_ID`, `OPENROUTER_SITE_URL`, `OPENROUTER_APP_NAME`
+- `LM_STUDIO_BASE_URL`, `LM_STUDIO_MODEL_ID`, `LM_STUDIO_API_KEY`
+- `OLLAMA_BASE_URL`, `OLLAMA_MODEL_ID`, `OLLAMA_API_KEY`
+- `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL_ID`
+- `ANTHROPIC_API_KEY`, `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL_ID`, `ANTHROPIC_VERSION`
+- `GEMINI_API_KEY`, `GEMINI_BASE_URL`, `GEMINI_MODEL_ID`
+- `BEDROCK_API_KEY`, `BEDROCK_BASE_URL`, `BEDROCK_MODEL_ID`, `BEDROCK_REGION`
+
+The UI talks only to internal routes, so provider credentials remain server-side.
+
+All `/app/api/ai/*` routes now add a request ID to responses and apply a basic in-memory per-route rate limit. Provider timing is logged server-side for debugging and fallback visibility.
+
+`/app/api/ai/chat` now supports Server-Sent Events. `AiChatPanel` opts into streaming automatically, and the router falls back to chunked non-stream responses when the selected provider does not expose a native streaming API.
+
+The AI task layer now uses a shared cache helper in `/Users/thorstenmeyer/Dev/Transparency/lib/ai/cache.ts`. It is still memory-backed in this MVP, but TTL, request dedupe, and expiry behavior are now centralized instead of duplicated per task.
+
+Run the lightweight AI regression suite with:
+
+```bash
+npm run test:ai
+```
 
 ## Tech Stack
 

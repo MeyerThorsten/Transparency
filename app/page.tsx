@@ -147,7 +147,7 @@ export default function Home() {
                 Your End-to-End Digital Health Dashboard
               </p>
               <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                All Is Well
+                Glasspane
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-white/80">
                 AI-powered infrastructure transparency for managed service
@@ -181,7 +181,7 @@ export default function Home() {
                   <span className="h-3 w-3 rounded-full bg-yellow-400" />
                   <span className="h-3 w-3 rounded-full bg-green-400" />
                   <span className="ml-3 text-xs text-white/40">
-                    all-is-well / dashboard
+                    glasspane / dashboard
                   </span>
                 </div>
                 <div className="grid grid-cols-3 gap-3">
@@ -422,7 +422,7 @@ export default function Home() {
       {/* ── Footer ───────────────────────────────────────────── */}
       <footer className="border-t border-gray-200 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#111118] py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 text-center text-sm text-gray-400 dark:text-gray-500">
-          <span className="text-xl font-bold text-gray-600 dark:text-gray-300">All Is Well</span>
+          <span className="text-xl font-bold text-gray-600 dark:text-gray-300">Glasspane</span>
           <p>&copy; {new Date().getFullYear()} Thorsten Meyer</p>
         </div>
       </footer>

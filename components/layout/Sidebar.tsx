@@ -30,7 +30,7 @@ export default function Sidebar() {
         <div className={`flex items-center justify-between border-b border-gray-100 dark:border-[#252533] ${collapsed ? "px-3 py-4" : "px-5 py-5"}`}>
           <div className="flex items-center gap-2 overflow-hidden">
             <span className={`font-bold text-gray-900 dark:text-white whitespace-nowrap ${collapsed ? "text-lg" : "text-xl"}`}>
-              {collapsed ? "AiW" : "All Is Well"}
+              {collapsed ? "GP" : "Glasspane"}
             </span>
           </div>
           <button
@@ -99,7 +99,7 @@ export default function Sidebar() {
         {!collapsed && (
           <div className="px-5 py-4 border-t border-gray-100 dark:border-[#252533]">
             <div className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
-              All Is Well — Digital Health Dashboard
+              Glasspane — Digital Health Dashboard
             </div>
           </div>
         )}

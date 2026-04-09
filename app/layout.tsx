@@ -3,9 +3,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-context";
 
 export const metadata: Metadata = {
-  title: "All Is Well Dashboard",
+  title: "Glasspane Dashboard",
   description:
-    "All Is Well — Your End-to-End Digital Health Dashboard with real-time monitoring, AI-powered insights, and role-based dashboards for 99.999% availability.",
+    "Glasspane — Your End-to-End Digital Health Dashboard with real-time monitoring, AI-powered insights, and role-based dashboards for 99.999% availability.",
 };
 
 export default function RootLayout({

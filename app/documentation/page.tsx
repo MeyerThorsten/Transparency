@@ -9,19 +9,19 @@ const videos = [
     title: "AI-Powered Infrastructure Transparency Project Description",
     embedUrl: "https://www.youtube.com/embed/q1NrQSXtXx4",
     description:
-      "All Is Well, a sophisticated real-time monitoring platform designed to eliminate the transparency gap between managed service providers and their clients. By utilizing IBM watsonx.ai, the dashboard replaces outdated static reports with interactive data visualizations tailored for executive, business, and technical stakeholders.",
+      "Glasspane, a sophisticated real-time monitoring platform designed to eliminate the transparency gap between managed service providers and their clients. By utilizing IBM watsonx.ai, the dashboard replaces outdated static reports with interactive data visualizations tailored for executive, business, and technical stakeholders.",
   },
   {
     title: "AI-Powered Infrastructure Visibility for Managed Services",
     embedUrl: "https://www.youtube.com/embed/ZEhyzk88Wcg",
     description:
-      "All Is Well is an advanced, AI-powered digital dashboard designed to provide managed service provider customers with real-time visibility into their IT infrastructure. The system uses IBM watsonx.ai to offer role-aware insights tailored specifically for executives, business managers, or technical leads.",
+      "Glasspane is an advanced, AI-powered digital dashboard designed to provide managed service provider customers with real-time visibility into their IT infrastructure. The system uses IBM watsonx.ai to offer role-aware insights tailored specifically for executives, business managers, or technical leads.",
   },
   {
     title: "Digital Health Dashboard Technology Statement",
     embedUrl: "https://www.youtube.com/embed/48NgsBR0FsI",
     description:
-      "The All Is Well digital health dashboard utilizes IBM watsonx.ai and Granite foundation models to transform complex infrastructure metrics into actionable intelligence. This technical architecture relies on a Next.js and TypeScript stack to deliver core AI capabilities.",
+      "The Glasspane digital health dashboard utilizes IBM watsonx.ai and Granite foundation models to transform complex infrastructure metrics into actionable intelligence. This technical architecture relies on a Next.js and TypeScript stack to deliver core AI capabilities.",
   },
 ];
 
@@ -30,13 +30,13 @@ const documents = [
     title: "Project Description",
     filename: "transparency-portal-project-description.pdf",
     description:
-      "Comprehensive project overview including scope, objectives, and key deliverables of All Is Well.",
+      "Comprehensive project overview including scope, objectives, and key deliverables of Glasspane.",
   },
   {
     title: "Technology Statement",
     filename: "transparency-portal-technology-statement.pdf",
     description:
-      "Technical architecture and technology stack powering the All Is Well digital health dashboard.",
+      "Technical architecture and technology stack powering the Glasspane digital health dashboard.",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function DocumentationPage() {
       <WidgetShell title="Video Library" size="full">
         <div className="space-y-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            Watch presentations and overviews of the All Is Well platform.
+            Watch presentations and overviews of the Glasspane platform.
           </p>
           <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
             {videos.map((video) => (
@@ -84,7 +84,7 @@ export default function DocumentationPage() {
       <WidgetShell title="Project Documentation" size="full">
         <div className="space-y-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            All Is Well — Your End-to-End Digital Health Dashboard. Download or view project documents below.
+            Glasspane — Your End-to-End Digital Health Dashboard. Download or view project documents below.
           </p>
           <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-3">
             {documents.map((doc) => (

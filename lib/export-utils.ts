@@ -22,7 +22,7 @@ export async function exportVisualSnapshot(gridElement: HTMLElement, meta: Expor
   // Branded header
   pdf.setFontSize(20);
   pdf.setTextColor(79, 70, 229); // indigo
-  pdf.text("All Is Well", 15, 15);
+  pdf.text("Glasspane", 15, 15);
   pdf.setFontSize(10);
   pdf.setTextColor(100, 100, 100);
   pdf.text(`${meta.viewName} Dashboard — ${meta.customerName}`, 15, 22);
@@ -33,7 +33,7 @@ export async function exportVisualSnapshot(gridElement: HTMLElement, meta: Expor
   const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
   pdf.addImage(imgData, "PNG", 15, 35, pdfWidth, Math.min(pdfHeight, 170));
 
-  pdf.save(`all-is-well-${meta.viewName.toLowerCase()}-snapshot.pdf`);
+  pdf.save(`glasspane-${meta.viewName.toLowerCase()}-snapshot.pdf`);
 }
 
 export function exportDataReport() {
