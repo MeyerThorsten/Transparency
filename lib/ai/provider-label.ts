@@ -1,7 +1,7 @@
 import type { AiProvider } from "./providers/types";
 
 const PROVIDER_LABELS: Record<AiProvider, string> = {
-  mock: "Mock AI",
+  mock: "Thorsten Meyer AI",
   watsonx: "IBM watsonx.ai",
   openrouter: "OpenRouter",
   "lm-studio": "LM Studio",

@@ -70,7 +70,7 @@ function getFallbackInsights(): AiInsightsResponse {
       },
     ],
     generatedAt: new Date().toISOString(),
-    providerLabel: "Mock AI",
+    providerLabel: "Thorsten Meyer AI",
   };
 }
 
