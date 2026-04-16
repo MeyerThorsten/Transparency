@@ -38,7 +38,7 @@ export default function AiCapacityPlannerWidget() {
     })
       .then(async (response) => {
         if (!response.ok) {
-          throw new Error("Failed to generate capacity plan");
+          throw new Error("Lost API access");
         }
         return response.json() as Promise<AiCapacityPlannerResponse>;
       })
@@ -52,7 +52,7 @@ export default function AiCapacityPlannerWidget() {
           return;
         }
 
-        setError(fetchError instanceof Error ? fetchError.message : "Failed to generate capacity plan");
+        setError(fetchError instanceof Error ? fetchError.message : "Lost API access");
       })
       .finally(() => {
         if (active) {

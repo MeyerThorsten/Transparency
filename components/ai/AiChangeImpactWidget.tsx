@@ -44,7 +44,7 @@ export default function AiChangeImpactWidget() {
     })
       .then(async (response) => {
         if (!response.ok) {
-          throw new Error("Failed to generate change impact analysis");
+          throw new Error("Lost API access");
         }
         return response.json() as Promise<AiChangeImpactResponse>;
       })
@@ -58,7 +58,7 @@ export default function AiChangeImpactWidget() {
           return;
         }
 
-        setError(fetchError instanceof Error ? fetchError.message : "Failed to generate change impact analysis");
+        setError(fetchError instanceof Error ? fetchError.message : "Lost API access");
       })
       .finally(() => {
         if (active) {

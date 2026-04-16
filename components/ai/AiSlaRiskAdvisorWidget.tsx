@@ -49,7 +49,7 @@ export default function AiSlaRiskAdvisorWidget() {
     })
       .then(async (response) => {
         if (!response.ok) {
-          throw new Error("Failed to generate SLA risk advisor");
+          throw new Error("Lost API access");
         }
         return response.json() as Promise<AiSlaRiskAdvisorResponse>;
       })
@@ -68,7 +68,7 @@ export default function AiSlaRiskAdvisorWidget() {
             ? "Timed out while generating the SLA risk advisor"
             : fetchError instanceof Error
               ? fetchError.message
-              : "Failed to generate SLA risk advisor",
+              : "Lost API access",
         );
       })
       .finally(() => {

@@ -6,6 +6,12 @@ A demo-ready dashboard showcasing how managed service customers can monitor thei
 
 This MVP uses mock data to demonstrate the look, feel, and interaction model of a widget-driven, role-based transparency portal with AI-powered insights.
 
+> ⚠️ **Security Notice**
+>
+> **The default configuration is UNAUTHENTICATED.** The `/api/ai/*` routes accept a `customerId` from the request body without verifying caller identity. This is acceptable for the public demo (which uses mock data only), but **must not be deployed with real customer data** without enabling authentication.
+>
+> See the [Security](#security) section below before deploying with real data.
+
 ## Quick Start
 
 ```bash
@@ -448,6 +454,58 @@ export async function getCurrentSla(customerId: string): Promise<number> {
 | `npm run build` | Production build (TypeScript check + optimize) |
 | `npm run start` | Serve production build |
 | `npm run lint` | Run ESLint |
+
+## Security
+
+### Default mode: unauthenticated demo
+
+Out of the box, Glasspane runs in **unauthenticated demo mode**. The `/api/ai/*` routes accept a `customerId` from the request body and serve data for that tenant without verifying caller identity.
+
+This is intentional for the public demo — all data is mock data and the goal is to let anyone explore the product. **The server logs a security warning at startup** when running in this mode.
+
+### Threat model
+
+| Scenario | Risk in demo mode | Risk with real data |
+|----------|------------------|---------------------|
+| Public demo with mock data | Acceptable | N/A |
+| Internal demo with mock data | Acceptable | N/A |
+| Production with real customer data | **Not acceptable** | Cross-tenant data exposure — any caller can pass any `customerId` |
+
+### Enabling secure-by-default mode
+
+Before deploying with real customer data, enable authentication:
+
+```bash
+# Required: turns on auth enforcement
+AI_ROUTE_AUTH_ENABLED=true
+
+# Required: define API keys with tenant scoping and per-tenant quotas
+AI_ROUTE_API_KEYS_JSON=[
+  {
+    "id": "ops-team",
+    "token": "<generate-a-strong-secret>",
+    "allowedCustomers": ["cust-001", "cust-002"],
+    "requestsPerMinute": 60,
+    "routeLimits": {"chat": 20}
+  }
+]
+```
+
+When auth is enabled:
+- All `/api/ai/*` requests must include `Authorization: Bearer <token>` or `x-ai-api-key`
+- The token's `allowedCustomers` list constrains which tenants the caller can access
+- Per-tenant rate limits are enforced via the shared cache layer
+- Requests without a valid token return 401/403
+
+### Roadmap
+
+The current API-key model is suitable for machine-to-machine integration. A future release should add session-based authentication (e.g., NextAuth) so that browser-based access binds the `customerId` to a logged-in user identity, rather than being declared in the request body.
+
+If you intend to deploy Glasspane with real customer data and need a session-based auth implementation before this lands, contributions are welcome — see the [GitHub repository](https://github.com/MeyerThorsten/Glasspane).
+
+### Reporting security issues
+
+If you discover a security vulnerability, please open a private security advisory on the [GitHub repository](https://github.com/MeyerThorsten/Glasspane/security/advisories) rather than a public issue.
 
 ## License
 

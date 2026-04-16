@@ -32,7 +32,7 @@ export default function AiCostForecastWidget() {
     })
       .then(async (response) => {
         if (!response.ok) {
-          throw new Error("Failed to generate cost forecast");
+          throw new Error("Lost API access");
         }
         return response.json() as Promise<AiCostForecastResponse>;
       })
@@ -46,7 +46,7 @@ export default function AiCostForecastWidget() {
           return;
         }
 
-        setError(fetchError instanceof Error ? fetchError.message : "Failed to generate cost forecast");
+        setError(fetchError instanceof Error ? fetchError.message : "Lost API access");
       })
       .finally(() => {
         if (active) {

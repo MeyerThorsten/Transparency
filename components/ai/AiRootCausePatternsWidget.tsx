@@ -33,7 +33,7 @@ export default function AiRootCausePatternsWidget() {
     })
       .then(async (response) => {
         if (!response.ok) {
-          throw new Error("Failed to generate root cause patterns");
+          throw new Error("Lost API access");
         }
         return response.json() as Promise<AiRootCausePatternsResponse>;
       })
@@ -47,7 +47,7 @@ export default function AiRootCausePatternsWidget() {
           return;
         }
 
-        setError(fetchError instanceof Error ? fetchError.message : "Failed to generate root cause patterns");
+        setError(fetchError instanceof Error ? fetchError.message : "Lost API access");
       })
       .finally(() => {
         if (active) {

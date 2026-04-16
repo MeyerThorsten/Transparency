@@ -31,7 +31,7 @@ export default function AiSummaryWidget() {
       body: JSON.stringify({ customerId: customer.id, view }),
     })
       .then(async (res) => {
-        if (!res.ok) throw new Error("Failed to generate summary");
+        if (!res.ok) throw new Error("Lost API access");
         const data = await res.json();
         setSummary(data.summary);
         setProviderLabel(data.providerLabel || "AI");

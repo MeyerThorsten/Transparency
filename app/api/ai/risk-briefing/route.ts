@@ -33,6 +33,6 @@ export async function POST(request: NextRequest) {
       durationMs: Date.now() - startedAt,
       detail: error instanceof Error ? error.message : String(error),
     });
-    return aiErrorResponse(requestId, "Failed to generate risk briefing", error);
+    return aiErrorResponse(requestId, "Lost API access", error);
   }
 }

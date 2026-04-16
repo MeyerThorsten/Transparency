@@ -50,7 +50,7 @@ export default function AiRiskBriefingWidget() {
     })
       .then(async (response) => {
         if (!response.ok) {
-          throw new Error("Failed to generate risk briefing");
+          throw new Error("Lost API access");
         }
         return response.json() as Promise<AiRiskBriefingResponse>;
       })
@@ -69,7 +69,7 @@ export default function AiRiskBriefingWidget() {
             ? "Timed out while generating the risk briefing"
             : fetchError instanceof Error
               ? fetchError.message
-              : "Failed to generate risk briefing",
+              : "Lost API access",
         );
       })
       .finally(() => {

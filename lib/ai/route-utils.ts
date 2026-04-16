@@ -106,9 +106,30 @@ function parseTokensJson(value: string | undefined): AiRouteApiKeyConfig[] {
   }
 }
 
+let unauthenticatedWarningLogged = false;
+
+function logUnauthenticatedModeWarning(): void {
+  if (unauthenticatedWarningLogged) return;
+  unauthenticatedWarningLogged = true;
+
+  console.warn(JSON.stringify({
+    scope: "ai.route",
+    status: "security-warning",
+    detail:
+      "Glasspane AI routes are running in UNAUTHENTICATED demo mode. "
+      + "Any caller can access /api/ai/* with a valid customerId. "
+      + "Do NOT deploy with real customer data unless you set AI_ROUTE_AUTH_ENABLED=true "
+      + "and configure AI_ROUTE_API_KEYS_JSON. See README.md > Security.",
+  }));
+}
+
 function getAiRoutePolicyConfig(): AiRoutePolicyConfig {
   const tokens = parseTokensJson(process.env.AI_ROUTE_API_KEYS_JSON);
   const authEnabled = process.env.AI_ROUTE_AUTH_ENABLED === "true" || tokens.length > 0;
+
+  if (!authEnabled) {
+    logUnauthenticatedModeWarning();
+  }
 
   return {
     authEnabled,

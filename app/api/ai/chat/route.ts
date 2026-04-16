@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
                   encoder.encode(
                     encodeSseEvent("error", {
                       requestId,
-                      message: "Failed to generate response",
+                      message: "Lost API access",
                     }),
                   ),
                 );
@@ -141,6 +141,6 @@ export async function POST(request: NextRequest) {
       durationMs: Date.now() - startedAt,
       detail: error instanceof Error ? error.message : String(error),
     });
-    return aiErrorResponse(requestId, "Failed to generate response", error);
+    return aiErrorResponse(requestId, "Lost API access", error);
   }
 }
